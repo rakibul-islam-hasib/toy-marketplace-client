@@ -3,12 +3,30 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { FaBars } from 'react-icons/fa';
 import { NavLink, useNavigate } from 'react-router-dom';
 import Button from '../hooks/Button';
+
 const navLinks = [
-    { name: 'Home', route: '/' },
-    { name: 'Events', route: '/events' },
-    { name: 'Donation', route: '/donation' },
-    { name: 'Blog', route: '/blog' },
-]
+    {
+      name: 'Home',
+      route: '/'
+    },
+    {
+      name: 'Toys',
+      route: '/toys'
+    },
+    {
+      name: 'New Arrivals',
+      route: '/new-arrivals'
+    },
+    {
+      name: 'Sale',
+      route: '/sale'
+    },
+    {
+      name: 'Contact Us',
+      route: '/contact'
+    }
+  ];
+  
 const NavBar = () => {
     const navigate = useNavigate();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -24,7 +42,7 @@ const NavBar = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
         >
-            <div className="lg:max-w-[90%] mx-auto  sm:px-6 lg:px-6">
+            <div className="lg:w-[95%] mx-auto  sm:px-6 lg:px-6">
                 <div className="flex px-4  items-center  justify-between h-[70px]">
                     {/* Logo */}
                     <div className="flex-shrink-0 pl-7 md:p-0  flex items-center">
@@ -46,11 +64,13 @@ const NavBar = () => {
                     <div className="hidden text-black md:block">
                         <div className="ml-10 flex items-center  space-x-4">
                             {navLinks.map((link) => (
-                                <NavLink className='font-bold' to={link.route} key={link.route}>{link.name}</NavLink>
+                                <NavLink className='font-bold hover:text-white duration-300' to={link.route} key={link.route} style={{ whiteSpace: 'nowrap' }}>
+                                    {link.name}
+                                </NavLink>
                             ))}
-                           <Button>
-                            Login
-                           </Button>
+                            <Button>
+                                Login
+                            </Button>
                         </div>
                     </div>
                 </div>
