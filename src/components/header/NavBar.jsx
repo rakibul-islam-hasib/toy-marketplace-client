@@ -1,36 +1,45 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaBars } from 'react-icons/fa';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import Button from '../hooks/Button';
 
 const navLinks = [
     {
-      name: 'Home',
-      route: '/'
+        name: 'Home',
+        route: '/'
     },
     {
-      name: 'Toys',
-      route: '/toys'
+        name: 'Toys',
+        route: '/toys'
     },
     {
-      name: 'New Arrivals',
-      route: '/new-arrivals'
+        name: 'New Arrivals',
+        route: '/new-arrivals'
     },
     {
-      name: 'Sale',
-      route: '/sale'
+        name: 'Sale',
+        route: '/sale'
     },
     {
-      name: 'Contact Us',
-      route: '/contact'
+        name: 'Contact Us',
+        route: '/contact'
     }
-  ];
-  
+];
+
 const NavBar = () => {
     const navigate = useNavigate();
+    const location = useLocation();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
+    const [isLogin, setIsLogin] = useState(false);
+    useEffect(() => {
+        if (location.pathname === '/login') {
+            setIsLogin(true)
+        }
+        else {
+            setIsLogin(false)
+        }
+    }, [location])
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
     };
@@ -46,7 +55,7 @@ const NavBar = () => {
                 <div className="flex px-4  items-center  justify-between h-[70px]">
                     {/* Logo */}
                     <div className="flex-shrink-0 pl-7 md:p-0  flex items-center">
-                        <h1 className='text-2xl font-bold'>Zooming Wheels</h1>
+                        <h1 onClick={() => navigate('/')} className='text-2xl cursor-pointer font-bold'>Zooming Wheels</h1>
                     </div>
 
                     {/* Mobile Menu Icon */}
@@ -68,9 +77,11 @@ const NavBar = () => {
                                     {link.name}
                                 </NavLink>
                             ))}
-                            <Button>
-                                Login
-                            </Button>
+                            {
+                                isLogin ? <Button onClick={()=>navigate('/register')}>Register</Button> : <Button onClick={() => navigate('/login')}>
+                                    Login
+                                </Button>
+                            }
                         </div>
                     </div>
                 </div>

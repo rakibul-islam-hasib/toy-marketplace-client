@@ -6,7 +6,7 @@ const Button = ({children , bg , onClick}) => {
         whileHover={{ scale: 1 }}
         whileTap={{ scale: 0.9 }}
         onClick={onClick}
-        className={`${bg ? bg : 'bg-primary'} px-5 w-full py-2 text-black rounded-lg font-bold`}
+        className={`${bg ? bg : 'bg-primary'} hover:text-white duration-500 px-5 w-full py-2 text-black rounded-lg font-bold`}
     >
         {children}
     </motion.button>
