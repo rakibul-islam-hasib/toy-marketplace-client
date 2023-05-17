@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaBars } from 'react-icons/fa';
 import { NavLink, useNavigate } from 'react-router-dom';
+import Button from '../hooks/Button';
 const navLinks = [
     { name: 'Home', route: '/' },
     { name: 'Events', route: '/events' },
@@ -18,18 +19,16 @@ const NavBar = () => {
 
     return (
         <motion.nav
-            className="bg-transparent fixed top-0 w-full z-10"
+            className="bg-secondary w-full z-10"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
         >
-            <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div className="flex px-4 py-9 justify-between h-16">
+            <div className="lg:max-w-[90%] mx-auto  sm:px-6 lg:px-6">
+                <div className="flex px-4  items-center  justify-between h-[70px]">
                     {/* Logo */}
-                    <div className="flex-shrink-0 mt-2 flex items-center">
-                        {/* Add your logo here */}
-                        {/* <img onClick={() => navigate('/')} src={logo} className='w-52 cursor-pointer' alt="" /> */}
-                        <h1>This is my App </h1>
+                    <div className="flex-shrink-0 pl-7 md:p-0  flex items-center">
+                        <h1 className='text-2xl font-bold'>Zooming Wheels</h1>
                     </div>
 
                     {/* Mobile Menu Icon */}
@@ -49,6 +48,9 @@ const NavBar = () => {
                             {navLinks.map((link) => (
                                 <NavLink className='font-bold' to={link.route} key={link.route}>{link.name}</NavLink>
                             ))}
+                           <Button>
+                            Login
+                           </Button>
                         </div>
                     </div>
                 </div>
@@ -57,7 +59,7 @@ const NavBar = () => {
                 <AnimatePresence>
                     {isMobileMenuOpen && (
                         <motion.div
-                            className="md:hidden mt-2 bg-black"
+                            className="md:hidden mt-2 w-full bg-black"
                             initial={{ opacity: 0, height: 0 }}
                             animate={{ opacity: 1, height: 'auto' }}
                             exit={{ opacity: 0, height: 0 }}
