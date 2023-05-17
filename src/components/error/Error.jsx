@@ -3,6 +3,7 @@ import img from '../../assets/jaconda-17.gif';
 import Button from '../hooks/Button';
 import { useNavigate } from 'react-router-dom';
 const Error = () => {
+    document.title = 'Zooming Wheels | Error';
     const navigate = useNavigate(); 
     return (
         <div className='h-screen flex justify-center items-center'>
