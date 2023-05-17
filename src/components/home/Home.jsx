@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
+import Hero from './hero/Hero';
 
 const Home = () => {
     document.title = 'Zooming Wheels | Home';
     return (
         <div>
-            <h1 className='mt-12 bg-slate-600'>Home</h1>
+            <Hero /> 
         </div>
     );
 };
