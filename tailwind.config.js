@@ -9,6 +9,10 @@ export default {
       colors : {
         'primary' : '#FE6DB4',
         'secondary' : '#4FC497',
+      },
+      fontFamily: {
+        catamaran: ['Catamaran', 'sans-serif'],
+        bubblegum: ['Bubblegum Sans', 'cursive'],
       }
     },
   },
