@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { AuthContext } from '../../provider/AuthProvider';
-
+import { ScaleLoader } from 'react-spinners';
 const Register = () => {
 
     // Change the title of the page
@@ -9,11 +9,12 @@ const Register = () => {
         document.title = 'Zooming Wheels | Register';
     }, [])
     // Get data from context
-    const { user, loader, setLoader } = useContext(AuthContext);
+    const { user, loader, setLoader, handelSignUp, updateUserName } = useContext(AuthContext);
 
+    if (user) {
+        return <Navigate to='/' replace/>
+    }
 
-
-    
     // Handle the form submit
     const handelFormSubmit = e => {
         e.preventDefault();
@@ -22,9 +23,31 @@ const Register = () => {
         const data = Object.fromEntries(formData);
         const { name, email, password } = data;
 
+        // Call the handelSignUp function from context
+        handelSignUp(email, password)
+            .then(result => {
+                updateUserName(name)
+                    .then(() => {
+                        setLoader(false);
+                    }, [])
+                    .catch(err => {
+                        console.log(err)
+                    })
+                }
+            )
+            .catch(error => {
+                setLoader(false);
+                console.log(error.code);
+            });
     }
     return (
-        <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
+        loader ? <div className="h-screen flex justify-center items-center">
+
+            <ScaleLoader
+                color="#36d7b7"
+                height={50}
+            />
+        </div> : <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
             <div className="max-w-screen-xl m-0 sm:m-10 bg-white shadow sm:rounded-lg flex justify-center flex-1">
                 <div className="lg:w-1/2 xl:w-5/12 p-6 sm:p-12">
                     <div className="mt-12 flex flex-col items-center">
@@ -117,9 +140,9 @@ const Register = () => {
                                     <Link
                                         to="/login"
                                         className="text-indigo-500 
-                                      border-b
+                                  border-b
 
-                                       border-dotted hover:text-indigo-700 font-semibold">Login</Link>
+                                   border-dotted hover:text-indigo-700 font-semibold">Login</Link>
                                 </p>
                             </form>
                         </div>

@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { FaBars } from 'react-icons/fa';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import Button from '../hooks/Button';
+import { AuthContext } from '../../provider/AuthProvider';
+import Swal from 'sweetalert2';
 
 const navLinks = [
     {
@@ -30,6 +32,7 @@ const navLinks = [
 const NavBar = () => {
     const navigate = useNavigate();
     const location = useLocation();
+    const { user, handelLogout } = useContext(AuthContext);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isLogin, setIsLogin] = useState(false);
     useEffect(() => {
@@ -43,6 +46,33 @@ const NavBar = () => {
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
     };
+    const logOut = () => {
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes , Log Out'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                handelLogout()
+                    .then(() => {
+                        navigate('/')
+                        Swal.fire(
+                            'Success..!',
+                            'You are logged out.',
+                            'success'
+                        )
+                    }).catch((error) => {
+                        console.log(error.message);
+                    });
+
+            }
+        })
+    }
 
     return (
         <motion.nav
@@ -78,7 +108,9 @@ const NavBar = () => {
                                 </NavLink>
                             ))}
                             {
-                                isLogin ? <Button onClick={()=>navigate('/register')}>Register</Button> : <Button onClick={() => navigate('/login')}>
+                                user ? <Button onClick={() => {
+                                    logOut()
+                                }}>Logout</Button> : isLogin ? <Button onClick={() => navigate('/register')}>Register</Button> : <Button onClick={() => navigate('/login')}>
                                     Login
                                 </Button>
                             }
