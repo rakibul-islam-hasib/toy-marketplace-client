@@ -40,7 +40,6 @@ const Register = () => {
             )
             .catch(error => {
                 setLoader(false);
-                console.log(error.code);
                 // Make this error message more user friendly
                 const errorCode = error.code.split('/')[1].split('-').join(' ');
                 setError(errorCode);
