@@ -36,7 +36,7 @@ const AuthProvider = ({ children }) => {
     }, [])
 
 
-    const value = { user, loader, setLoader, handelSignUp, updateUserName , handelLogout }
+    const value = { user, loader, setLoader, handelSignUp, updateUserName , handelLogout , login}
     return (
         <AuthContext.Provider value={value}>
             {children}
