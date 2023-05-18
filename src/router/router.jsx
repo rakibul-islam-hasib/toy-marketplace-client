@@ -5,6 +5,7 @@ import Error from "../components/error/Error";
 import Login from "../components/user/Login";
 import Register from "../components/user/Register";
 import AddToy from "../components/actions/AddToy";
+import Privet from "./Privet";
 
 const router = createBrowserRouter([
     {
@@ -14,8 +15,8 @@ const router = createBrowserRouter([
         children: [
             { path: '/', element: <Home /> },
             { path: 'login', element: <Login /> },
-            { path: 'register', element: <Register /> }, 
-            {path: '/add-toy', element: <AddToy />},
+            { path: 'register', element: <Register /> },
+            { path: '/add-toy', element: <Privet> <AddToy /></Privet> },
         ]
     },
 ]);
