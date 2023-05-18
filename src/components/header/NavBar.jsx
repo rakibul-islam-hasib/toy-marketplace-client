@@ -90,11 +90,11 @@ const NavBar = () => {
                         <div className="flex">
                             <ul className="ml-10 flex items-center space-x-4 pr-4">
                                 {navLinks.map((link) => (
-                                    <li>
+                                    <li key={link.route}>
                                         <NavLink
                                             className='font-bold text-white hover:text-primary duration-300'
                                             to={link.route}
-                                            key={link.route}
+                                            
                                             style={{ whiteSpace: 'nowrap' }}
                                         >
                                             {link.name}

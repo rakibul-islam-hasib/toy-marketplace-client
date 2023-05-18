@@ -1,66 +1,70 @@
-import { TextField } from '@mui/material';
-import React, { useEffect, useRef } from 'react';
+import { Box, FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
+
+import React, { useContext, useEffect, useRef } from 'react';
+import { AuthContext } from '../../provider/AuthProvider';
 
 const AddToy = () => {
 
     const nameRef = useRef(null);
+    const emailRef = useRef(null);
+    const [age, setAge] = React.useState('');
+    const { user } = useContext(AuthContext);
 
-
-
+    const handleChange = (event) => {
+        setAge(event.target.value);
+    };
     useEffect(() => {
         document.title = 'Zooming Wheels | Add Toy';
     }, [])
     return (
         <div>
-            <form class="bg-white p-4 rounded-lg">
-                <div class="relative bg-inherit">
-                    <input
-                        ref={nameRef}                    
-                        name="username"
-                        type="text"
-                        class="bg-transparent
-                        peer
-                         h-10 w-72 
-                         rounded-lg
-                          text-black
-                           placeholder-transparent
-                            ring-2 px-3 ring-gray-500 focus:ring-sky-600 focus:outline-none focus:border-rose-600"
-                        placeholder="Type inside me" />
-                    <label for="username" onClick={()=>nameRef.current.focus()} class="absolute cursor-text left-0 -top-3 text-sm text-gray-500 bg-inherit mx-1 px-1 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-2 peer-focus:-top-3 peer-focus:text-sky-600 peer-focus:text-sm transition-all">
-                        Type inside Name 
-                    </label>
+            <div className="mb-12">
+                <h1 className='text-5xl mt-11 mb-5 hover:text-secondary duration-300 cursor-pointer text-center'>Sell your toys</h1>
+                <p className='text-base text-center text-secondary hover:text-primary cursor-pointer duration-300'>Please fill this form to sell your toys</p>
+            </div>
+            <form className='w-[80%] mx-auto' action="">
+                <h1 className='text-center my-4'>Seller Info</h1>
+                <div className="flex gap-7">
+                    <TextField
+                        id="outlined-basic"
+                        label="Name"
+                        variant="outlined"
+                        className='w-full mb-5'
+                        inputRef={nameRef}
+                        defaultValue={user.displayName}
+                    />
+                    <TextField
+                        id="outlined-basic"
+                        label="Email"
+                        variant="outlined"
+                        className='w-full mb-5'
+                        // inputRef={nameRef}
+                        defaultValue={user?.email ? user.email : ''}
+                    />
                 </div>
-                <div class="relative bg-inherit">
-                    <input
-                        name="email"
-                        type="text"
-                        class="bg-transparent
-                        peer
-                         h-10 w-72 
-                         rounded-lg
-                          text-gray-200
-                           placeholder-transparent
-                            ring-2 px-3 ring-gray-500 focus:ring-sky-600 focus:outline-none focus:border-rose-600"
-                        placeholder="Type inside me" />
-                    <label for="email" class="absolute cursor-text left-0 -top-3 text-sm text-gray-500 bg-inherit mx-1 px-1 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-2 peer-focus:-top-3 peer-focus:text-sky-600 peer-focus:text-sm transition-all">
-                        Type inside me
-                    </label>
-                </div>
-                <div class="relative bg-inherit">
-                    <input
-                        name="password"
-                        type="text"
-                        class="bg-transparent
-                        peer
-                         h-10 w-72 
-                         rounded-lg
-                          text-gray-200
-                           placeholder-transparent
-                            ring-2 px-3 ring-gray-500 focus:ring-sky-600 focus:outline-none focus:border-rose-600"
-                        placeholder="Type inside me" />
-                    <label for="password" class="absolute cursor-text left-0 -top-3 text-sm text-gray-500 bg-inherit mx-1 px-1 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-2 peer-focus:-top-3 peer-focus:text-sky-600 peer-focus:text-sm transition-all">
-                        Type inside me
-                    </label>
+                <h1 className='text-center my-4'>Toys Info</h1>
+                <div className="flex gap-7">
+                    <TextField
+                        id="outlined-basic"
+                        label="Toy Name"
+                        variant="outlined"
+                        className='w-full mb-5'
+                        inputRef={nameRef}
+                    />
+                    <Box sx={{ minWidth: 288 }}>
+                        <InputLabel id="demo-simple-select-label">Age</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={age}
+                            label="Age"
+                            onChange={handleChange}
+                        >
+                            <MenuItem value={10}>Ten</MenuItem>
+                            <MenuItem value={20}>Twenty</MenuItem>
+                            <MenuItem value={30}>Thirty</MenuItem>
+                        </Select>
+                    </Box>
                 </div>
             </form>
         </div>
