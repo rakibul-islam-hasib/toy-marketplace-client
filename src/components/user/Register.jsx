@@ -41,7 +41,7 @@ const Register = () => {
             .catch(error => {
                 setLoader(false);
                 // Make this error message more user friendly
-                const errorCode = error.code.split('/')[1].split('-').join(' ');
+                const errorCode = error?.code?.split('/')[1]?.split('-')?.join(' ');
                 setError(errorCode);
             });
     }

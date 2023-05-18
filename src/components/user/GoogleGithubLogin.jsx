@@ -1,9 +1,33 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AuthContext } from '../../provider/AuthProvider';
 
 const GoogleGithubLogin = () => {
+
+    const { googleLogin, githubLogin, setLoader } = useContext(AuthContext);
+    const handelGoogleLogin = () => {
+        setLoader(true)
+        googleLogin()
+            .then(() => { })
+            .catch(err => {
+                setLoader(false)
+                console.log(err.code)
+            })
+    }
+    const handelGithubLogin = () => {
+        setLoader(true)
+        githubLogin()
+            .then(() => {})
+            .catch(err => {
+                setLoader(false)
+                console.log(err.code)
+            })
+    }
+
     return (
         <div className="flex flex-col items-center">
+            {/* Google Button  */}
             <button
+                onClick={handelGoogleLogin}
                 className="w-full max-w-xs font-bold shadow-sm rounded-lg py-3 bg-indigo-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline">
                 <div className="bg-white p-2 rounded-full">
                     <svg className="w-4" viewBox="0 0 533.5 544.3">
@@ -25,8 +49,9 @@ const GoogleGithubLogin = () => {
                     Continue with Google
                 </span>
             </button>
-
+            {/* Github Button */}
             <button
+                onClick={() => handelGithubLogin()}
                 className="w-full max-w-xs font-bold shadow-sm rounded-lg py-3 bg-indigo-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline mt-5">
                 <div className="bg-white p-1 rounded-full">
                     <svg className="w-6" viewBox="0 0 32 32">

@@ -29,8 +29,8 @@ const Login = () => {
             .catch(err => {
                 setLoader(false);
                 console.log(err.code);
-                const errorMessage = err.code.split('/')[1].split('-').join(' ');
-                setError(errorMessage);
+                const errorCode = error?.code?.split('/')[1]?.split('-')?.join(' ');
+                setError(errorCode);
             })
     }
     return (

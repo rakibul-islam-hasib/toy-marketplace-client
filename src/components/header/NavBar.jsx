@@ -12,12 +12,8 @@ const navLinks = [
         route: '/'
     },
     {
-        name: 'Toys',
+        name: 'All Toys',
         route: '/toys'
-    },
-    {
-        name: 'New Arrivals',
-        route: '/new-arrivals'
     },
     {
         name: 'Sale',
@@ -35,19 +31,16 @@ const NavBar = () => {
     const { user, handelLogout } = useContext(AuthContext);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isLogin, setIsLogin] = useState(false);
+
     useEffect(() => {
-        if (location.pathname === '/login') {
-            setIsLogin(true)
-        }
-        else {
-            setIsLogin(false)
-        }
-    }, [location])
+        setIsLogin(location.pathname === '/login');
+    }, [location]);
+
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
     };
+    // console.log(user)
     const logOut = () => {
-
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -55,36 +48,36 @@ const NavBar = () => {
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes , Log Out'
+            confirmButtonText: 'Yes, Log Out'
         }).then((result) => {
             if (result.isConfirmed) {
                 handelLogout()
                     .then(() => {
-                        navigate('/')
+                        navigate('/');
                         Swal.fire(
                             'Success..!',
                             'You are logged out.',
                             'success'
-                        )
-                    }).catch((error) => {
+                        );
+                    })
+                    .catch((error) => {
                         console.log(error.message);
                     });
-
             }
-        })
-    }
+        });
+    };
 
     return (
         <motion.nav
-            className="bg-secondary w-full z-10"
+            className="bg-black text-white w-full z-10"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
         >
-            <div className="lg:w-[95%] mx-auto  sm:px-6 lg:px-6">
-                <div className="flex px-4  items-center  justify-between h-[70px]">
+            <div className="lg:w-[95%] mx-auto sm:px-6 lg:px-6">
+                <div className="flex px-4 items-center justify-between h-[70px]">
                     {/* Logo */}
-                    <div className="flex-shrink-0 pl-7 md:p-0  flex items-center">
+                    <div className="flex-shrink-0 pl-7 md:p-0 flex items-center">
                         <h1 onClick={() => navigate('/')} className='text-2xl cursor-pointer font-bold'>Zooming Wheels</h1>
                     </div>
 
@@ -100,20 +93,36 @@ const NavBar = () => {
                     </div>
 
                     {/* Navigation Links */}
-                    <div className="hidden text-black md:block">
-                        <div className="ml-10 flex items-center  space-x-4">
-                            {navLinks.map((link) => (
-                                <NavLink className='font-bold hover:text-white duration-300' to={link.route} key={link.route} style={{ whiteSpace: 'nowrap' }}>
-                                    {link.name}
-                                </NavLink>
-                            ))}
-                            {
-                                user ? <Button onClick={() => {
-                                    logOut()
-                                }}>Logout</Button> : isLogin ? <Button onClick={() => navigate('/register')}>Register</Button> : <Button onClick={() => navigate('/login')}>
-                                    Login
-                                </Button>
-                            }
+                    <div className="hidden  text-black md:block">
+                        <div className="flex">
+                            <div className="ml-10 flex items-center space-x-4 pr-4">
+                                {navLinks.map((link) => (
+                                    <NavLink
+                                        className='font-bold text-white hover:text-primary duration-300'
+                                        to={link.route}
+                                        key={link.route}
+                                        style={{ whiteSpace: 'nowrap' }}
+                                    >
+                                        {link.name}
+                                    </NavLink>
+                                ))}
+                            </div>
+
+                            <div className="flex">
+                                {/* Display User Image */}
+                                {user && (
+                                    <div className="h-10 w-12 mr-3 rounded-full">
+                                        <img src={user.photoURL} alt="" className="h-full w-full rounded-full" />
+                                    </div>
+                                )}
+                                {user ? (
+                                    <Button onClick={logOut}>Logout</Button>
+                                ) : isLogin ? (
+                                    <Button onClick={() => navigate('/register')}>Register</Button>
+                                ) : (
+                                    <Button onClick={() => navigate('/login')}>Login</Button>
+                                )}
+                            </div>
                         </div>
                     </div>
                 </div>
