@@ -1,19 +1,27 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../provider/AuthProvider';
 
 const Register = () => {
+
     // Change the title of the page
     useEffect(() => {
         document.title = 'Zooming Wheels | Register';
     }, [])
+    // Get data from context
+    const { user, loader, setLoader } = useContext(AuthContext);
 
 
+
+    
+    // Handle the form submit
     const handelFormSubmit = e => {
         e.preventDefault();
         // Get the from data as a object
         const formData = new FormData(e.target);
         const data = Object.fromEntries(formData);
-        console.log(data);
+        const { name, email, password } = data;
+
     }
     return (
         <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
@@ -89,8 +97,8 @@ const Register = () => {
                                     className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
                                     type="password"
                                     name='password'
-                                    placeholder="Password" 
-                                    />
+                                    placeholder="Password"
+                                />
                                 <button
                                     type='submit'
                                     className="mt-5 tracking-wide font-semibold bg-indigo-500 text-gray-100 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
