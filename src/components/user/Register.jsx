@@ -1,17 +1,30 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 const Register = () => {
-    document.title = 'Zooming Wheels | Register';
+    // Change the title of the page
+    useEffect(() => {
+        document.title = 'Zooming Wheels | Register';
+    }, [])
+
+
+    const handelFormSubmit = e => {
+        e.preventDefault();
+        // Get the from data as a object
+        const formData = new FormData(e.target);
+        const data = Object.fromEntries(formData);
+        console.log(data);
+    }
     return (
         <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
             <div className="max-w-screen-xl m-0 sm:m-10 bg-white shadow sm:rounded-lg flex justify-center flex-1">
                 <div className="lg:w-1/2 xl:w-5/12 p-6 sm:p-12">
                     <div className="mt-12 flex flex-col items-center">
                         <div className="text-center">
-                        <h1 className="text-2xl xl:text-3xl font-extrabold">
-                            Sign up
-                        </h1>
-                        <p className='text-gray-500 mt-2'>It will take less than 2 minutes</p>
+                            <h1 className="text-2xl xl:text-3xl font-extrabold">
+                                Sign up
+                            </h1>
+                            <p className='text-gray-500 mt-2'>It will take less than 2 minutes</p>
                         </div>
                         <div className="w-full flex-1 mt-8">
                             <div className="flex flex-col items-center">
@@ -58,18 +71,28 @@ const Register = () => {
                                     Or sign up with e-mail
                                 </div>
                             </div>
-
-                            <div className="mx-auto max-w-xs">
+                            {/* Email Password Login  */}
+                            <form onSubmit={handelFormSubmit} className="mx-auto max-w-xs">
                                 <input
                                     className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                                    type="email" placeholder="Email" />
+                                    type="text"
+                                    placeholder="Name"
+                                    name='name'
+                                />
                                 <input
                                     className="w-full px-8 mt-5 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                                    type="email" placeholder="Email" />
+                                    type="email"
+                                    name='email'
+                                    placeholder="Email"
+                                />
                                 <input
                                     className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
-                                    type="password" placeholder="Password" />
+                                    type="password"
+                                    name='password'
+                                    placeholder="Password" 
+                                    />
                                 <button
+                                    type='submit'
                                     className="mt-5 tracking-wide font-semibold bg-indigo-500 text-gray-100 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
                                     <svg className="w-6 h-6 -ml-2" fill="none" stroke="currentColor" strokeWidth="2"
                                         strokeLinecap="round" strokeLinejoin="round">
@@ -82,16 +105,15 @@ const Register = () => {
                                     </span>
                                 </button>
                                 <p className="mt-6 text-xs text-gray-600 text-center">
-                                    I agree to abide by templatana's
-                                    <a href="#" className="border-b border-gray-500 border-dotted">
-                                        Terms of Service
-                                    </a>
-                                    and its
-                                    <a href="#" className="border-b border-gray-500 border-dotted">
-                                        Privacy Policy
-                                    </a>
+                                    Already as a member ?
+                                    <Link
+                                        to="/login"
+                                        className="text-indigo-500 
+                                      border-b
+
+                                       border-dotted hover:text-indigo-700 font-semibold">Login</Link>
                                 </p>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
