@@ -67,7 +67,7 @@ const AddToy = () => {
             .then(data => {
                 console.log(data);
                 if (data.insertedId) {
-                    e.target.reset();
+                    // e.target.reset();
                     Swal.fire(
                         'Good job!',
                         'Your toys successfully added to our database!',
