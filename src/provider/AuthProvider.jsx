@@ -17,8 +17,8 @@ const AuthProvider = ({ children }) => {
         setLoader(true);
         return createUserWithEmailAndPassword(auth ,  email, password);
     };
-    const updateUserName = (name) => {
-       updateProfile(auth.currentUser, { displayName: name })
+    const updateUserName = (name , photo) => {
+       updateProfile(auth.currentUser, { displayName: name , photoURL : photo })
     };
     const handelLogout = () => {
         return signOut(auth);
