@@ -5,10 +5,53 @@ import Swal from 'sweetalert2';
 import { AuthContext } from '../../provider/AuthProvider';
 import { motion } from 'framer-motion';
 
-const AddToy = () => {
+const toyVehicles = [
+    {
+        category: 'Vehicle',
+        subcategories: ['Car', 'Bus', 'Truck', 'Motorcycle']
+    },
+    {
+        category: 'Aircraft',
+        subcategories: ['Helicopter', 'Airplane', 'Drone', 'Rocket']
+    },
+    {
+        category: 'Watercraft',
+        subcategories: ['Boat', 'Ship', 'Submarine', 'Jet Ski']
+    },
+    {
+        category: 'Construction',
+        subcategories: ['Excavator', 'Crane', 'Bulldozer', 'Dump Truck']
+    },
+    {
+        category: 'Space',
+        subcategories: ['Satellite', 'Space Shuttle', 'Rover', 'Rocket']
+    }
+];
 
+const AddToy = () => {
     const nameRef = useRef(null);
     const { user } = useContext(AuthContext);
+    const [category, setCategory] = useState('');
+    const [subcategory, setSubcategory] = useState('');
+    const [subcategories, setSubcategories] = useState([
+        'Car',
+        'Bus',
+        'Truck',
+        'Motorcycle',
+    ]);
+
+    const handelCategoryChange = e => {
+        setCategory(e.target.value);
+        const selectedCategory = toyVehicles.find(
+            vehicle => vehicle.category === e.target.value
+        );
+        if (selectedCategory) {
+            setSubcategories(selectedCategory.subcategories);
+        } else {
+            setSubcategories([]);
+        }
+    };
+
     const handelFromSubmit = e => {
         e.preventDefault();
         const formData = new FormData(e.target);
@@ -29,17 +72,16 @@ const AddToy = () => {
                         'Good job!',
                         'Your toys successfully added to our database!',
                         'success'
-                    )
+                    );
                 }
-            })
+            });
         console.log(data);
-
-    }
-
+    };
 
     useEffect(() => {
         document.title = 'Zooming Wheels | Add Toy';
-    }, [])
+    }, []);
+
     return (
         <div className='mb-14'>
             <div className="mb-12">
@@ -88,7 +130,6 @@ const AddToy = () => {
                         variant="outlined"
                         className='w-full mb-5'
                     />
-
                 </div>
                 <h1 className='text-center my-4'>Category And Sub Category</h1>
                 <div className="flex gap-7">
@@ -98,16 +139,17 @@ const AddToy = () => {
                             <Select
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
-                                // value={category}
                                 required
                                 label="Category"
                                 name='category'
-                                defaultValue={`10`}
-                                // onChange={handleSubCategoryChange}
+                                defaultValue={'Vehicle'}
+                                onChange={handelCategoryChange}
                             >
-                                <MenuItem value={`10`}>Ten</MenuItem>
-                                <MenuItem value={`20`}>Twenty</MenuItem>
-                                <MenuItem value={`30`}>Thirty</MenuItem>
+                                {toyVehicles.map((vehicle, index) => (
+                                    <MenuItem key={index} value={vehicle.category}>
+                                        {vehicle.category}
+                                    </MenuItem>
+                                ))}
                             </Select>
                         </FormControl>
                     </Box>
@@ -117,21 +159,21 @@ const AddToy = () => {
                             <Select
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
-                                // value={subCategory}
                                 required
-                                defaultValue={`car`}
+                                defaultValue={'car'}
                                 label="Sub Category"
                                 name='subCategory'
-                                // onChange={handleCategoryChange}
                             >
-                                <MenuItem value='car'>Car</MenuItem>
-                                <MenuItem value='bus'>Bus</MenuItem>
-                                <MenuItem value='truck'>Truck</MenuItem>
+                                {subcategories.map((subCategory, index) => (
+                                    <MenuItem key={index} value={subCategory}>
+                                        {subCategory}
+                                    </MenuItem>
+                                ))}
                             </Select>
                         </FormControl>
                     </Box>
                 </div>
-                <h1 className='text-center my-4'>Price & Ratings </h1>
+                <h1 className='text-center my-4'>Price & Ratings</h1>
                 <div className="flex gap-7">
                     <TextField
                         id="outlined-basic"
@@ -172,7 +214,6 @@ const AddToy = () => {
                         cols="30"
                         rows="8"
                     ></textarea>
-
                 </div>
                 <motion.button
                     whileHover={{ scale: 1 }}
