@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../provider/AuthProvider';
 import { Pagination, Stack } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const MyToys = () => {
     const [data, setData] = useState([]);
@@ -20,7 +21,7 @@ const MyToys = () => {
                 setTotal(data.length)
                 // console.log(data)
             })
-    }, [])
+    }, [data])
     useEffect(() => {
         document.title = `My Toys | Zooming Wheels`;
         fetch(`http://localhost:5000/api/user-toys?email=${user.email}&page=${currentPage}&limit=${itemsPerPage}`)
@@ -33,7 +34,36 @@ const MyToys = () => {
         setCurrentPage(value);
     };
     const handelDelete = (id) => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`http://localhost:5000/api/delete-toy/${id}`, {
+                    method: 'DELETE',
+                })
+                    .then(res => res.json())
+                    .then(result => {
+                        if (result.deletedCount > 0) {
+                            const remaining = data.filter(toy => toy._id !== id);
+                            setData(remaining);
+                            Swal.fire(
+                                'Deleted!',
+                                'Your file has been deleted.',
+                                'success'
+                            )
+                        }
+
+                    })
+            }
+        })
         console.log(id)
+
     }
     return (
         <div className='my-11'>
