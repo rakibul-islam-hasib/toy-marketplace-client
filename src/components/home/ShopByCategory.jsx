@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
+
 import ShopCard from './ShopCard';
 
 const toyVehicles = [
@@ -32,7 +33,6 @@ const ShopByCategory = () => {
   const [nestedValue, setNestedValue] = useState(0);
   const [allToys, setAllToys] = useState([]);
   const [filteredToys, setFilteredToys] = useState([]);
-  // console.log("🚀 ~ file: ShopByCategory.jsx:34 ~ ShopByCategory ~ filteredToys:", filteredToys)
 
   useEffect(() => {
     fetch('http://localhost:5000/api/all-toys')
@@ -73,29 +73,31 @@ const ShopByCategory = () => {
     <div className='w-[90%] mx-auto my-12'>
       <Box sx={{ width: '100%' }}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+          <Tabs
+            value={value} variant="scrollable"
+            scrollButtons="auto" onChange={handleChange} aria-label="basic tabs example">
             {toyVehicles.map((vehicle, index) => (
               <Tab key={index} label={vehicle.category} value={index} />
             ))}
           </Tabs>
         </Box>
         <TabPanel value={value} index={value}>
-          <Tabs value={nestedValue} onChange={handleChangeNested} aria-label="nested tabs example">
+          <Tabs value={nestedValue} variant="scrollable" scrollButtons="auto"  onChange={handleChangeNested} aria-label="nested tabs example">
             {toyVehicles[value].subcategories.map((subcategory, index) => (
               <Tab key={index} label={subcategory} value={index} />
             ))}
           </Tabs>
           {/* Render the corresponding filtered toys */}
-          <div className='flex gap-3'>
-            {
-              filteredToys.length == 0 ? <div className="text-center">
+          <div className='flex flex-wrap gap-3'>
+            {filteredToys.length === 0 ? (
+              <div className="text-center">
                 <h1 className='text-3xl text-red-500 text-center my-3'>No Item In this category</h1>
-              </div> : filteredToys.map(toy => (
-                // <div key={toy._id}>{toy.name}</div>
+              </div>
+            ) : (
+              filteredToys.map(toy => (
                 <ShopCard key={toy._id} toy={toy} />
               ))
-
-            }
+            )}
           </div>
         </TabPanel>
       </Box>

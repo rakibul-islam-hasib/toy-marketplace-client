@@ -6,6 +6,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import "swiper/css/navigation";
 import { Navigation } from "swiper";
+import HeroSlider2 from './HeroSlider2';
 
 const Hero = () => {
     return (
@@ -22,7 +23,7 @@ const Hero = () => {
                         <HeroSlider />
                     </SwiperSlide>
                      <SwiperSlide>
-                        <HeroSlider />
+                        <HeroSlider2 />
                     </SwiperSlide>
                </Swiper>
             </div>
