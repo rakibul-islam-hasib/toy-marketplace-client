@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
+import ShopCard from './ShopCard';
 
 const toyVehicles = [
   {
@@ -31,7 +32,7 @@ const ShopByCategory = () => {
   const [nestedValue, setNestedValue] = useState(0);
   const [allToys, setAllToys] = useState([]);
   const [filteredToys, setFilteredToys] = useState([]);
-  console.log("🚀 ~ file: ShopByCategory.jsx:34 ~ ShopByCategory ~ filteredToys:", filteredToys)
+  // console.log("🚀 ~ file: ShopByCategory.jsx:34 ~ ShopByCategory ~ filteredToys:", filteredToys)
 
   useEffect(() => {
     fetch('http://localhost:5000/api/all-toys')
@@ -85,10 +86,16 @@ const ShopByCategory = () => {
             ))}
           </Tabs>
           {/* Render the corresponding filtered toys */}
-          <div>
-            {filteredToys.map(toy => (
-              <div key={toy._id}>{toy.name}</div>
-            ))}
+          <div className='flex gap-3'>
+            {
+              filteredToys.length == 0 ? <div className="text-center">
+                <h1 className='text-3xl text-red-500 text-center my-3'>No Item In this category</h1>
+              </div> : filteredToys.map(toy => (
+                // <div key={toy._id}>{toy.name}</div>
+                <ShopCard key={toy._id} toy={toy} />
+              ))
+
+            }
           </div>
         </TabPanel>
       </Box>
