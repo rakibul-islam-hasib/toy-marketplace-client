@@ -13,7 +13,6 @@ const Toys = () => {
     const [totalPage, setTotalPAge] = useState(totalPages); 
 
     const [searchQuery, setSearchQuery] = useState('');
-    const [isSearch, setIsSearch] = useState(false);
 
     // !Fetch all data
     useEffect(() => {
