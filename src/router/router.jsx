@@ -9,6 +9,7 @@ import Privet from "./Privet";
 import Toys from "../components/pages/Toys/Toys";
 import Details from "../components/pages/details/Details";
 import MyToys from "../components/user/MyToys";
+import Update from "../components/pages/update/Update";
 
 const router = createBrowserRouter([
     {
@@ -22,7 +23,8 @@ const router = createBrowserRouter([
             { path: '/add-toy', element: <Privet> <AddToy /></Privet> },
             { path: '/toys', element: <Toys />, loader: () => fetch('http://localhost:5000/api/total-toys') },
             { path: '/toy/:id', element: <Privet><Details /></Privet>, loader: ({ params }) => fetch(`http://localhost:5000/api/toy/${params.id}`) }, 
-            {path : 'my-toys' , element : <MyToys />}
+            {path : 'my-toys' , element : <MyToys />}, 
+            {path : '/update/:id' , element: <Update /> , loader: ({ params }) => fetch(`http://localhost:5000/api/toy/${params.id}`)}
         ]
     },
 ]);

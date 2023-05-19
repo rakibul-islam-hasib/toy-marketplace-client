@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../provider/AuthProvider';
 import { Pagination, Stack } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { AiFillEdit } from 'react-icons/ai';
+import {MdDeleteSweep} from 'react-icons/md';
 import Swal from 'sweetalert2';
 
 const MyToys = () => {
@@ -104,8 +106,10 @@ const MyToys = () => {
                                     <td className="py-4 px-6 border-b border-gray-200">{toy.price} $ only</td>
                                     <td className="py-4 px-6 border-b border-gray-200">{toy.quantity} pcs</td>
                                     <td className="py-4 px-6 border-b border-gray-200">
-                                        <span className="bg-green-500 mr-3 text-white py-1 px-2 rounded-full text-xs">Active</span>
-                                        <span onClick={() => handelDelete(toy._id)} className="bg-red-500 cursor-pointer text-white py-1 px-2 rounded-full text-xs">Delete</span>
+                                        <span className="bg-green-500 mr-3 inline-flex items-center gap-2 text-white py-1 px-2 rounded-full text-xs"><AiFillEdit /> Edit</span>
+                                        <span
+                                         onClick={() => handelDelete(toy._id)}
+                                          className="bg-red-500 inline-flex items-center gap-2 cursor-pointer text-white py-1 px-2 rounded-full text-xs"><MdDeleteSweep /> Delete</span>
                                     </td>
                                 </tr>)
                             }
