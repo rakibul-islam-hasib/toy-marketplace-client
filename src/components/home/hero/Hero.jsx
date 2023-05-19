@@ -2,6 +2,10 @@ import React from 'react';
 import Hero_category from './Hero_category';
 import HeroSlider from './HeroSlider';
 import Hero_Category_sm from './Hero_Category_sm';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import "swiper/css/navigation";
+import { Navigation } from "swiper";
 
 const Hero = () => {
     return (
@@ -10,7 +14,17 @@ const Hero = () => {
                 <Hero_category />
             </div>
             <div className="md:col-span-4 col-span-5">
-                <HeroSlider />
+               <Swiper navigation={true}
+               loop={true}
+                modules={[Navigation]}
+               className='h-full'>
+                     <SwiperSlide>
+                        <HeroSlider />
+                    </SwiperSlide>
+                     <SwiperSlide>
+                        <HeroSlider />
+                    </SwiperSlide>
+               </Swiper>
             </div>
             <div className="md:hidden col-span-5">
                 <Hero_Category_sm />
