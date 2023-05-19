@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import NavBar from './components/header/NavBar';
+import { Toaster } from 'react-hot-toast';
 import { Outlet } from 'react-router-dom';
 import Footer from './components/shared/Footer';
 import { AuthContext } from './provider/AuthProvider';
@@ -17,6 +18,7 @@ const App = () => {
       <NavBar />
       <Outlet />
       <Footer />
+      <Toaster />
     </div>
   );
 };

@@ -4,7 +4,8 @@ import Swal from 'sweetalert2';
 // import { AuthContext } from '../../provider/AuthProvider';
 import { motion } from 'framer-motion';
 import { AuthContext } from '../../../provider/AuthProvider';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
 const toyVehicles = [
     {
         category: 'Vehicle',
@@ -30,9 +31,9 @@ const toyVehicles = [
 const Update = () => {
     const nameRef = useRef(null);
     const { user } = useContext(AuthContext);
-    const data = useLoaderData(); 
-    console.log("🚀 ~ file: Update.jsx:34 ~ Update ~ data:", data)
+    const data = useLoaderData();
     const [category, setCategory] = useState('');
+    const navigate = useNavigate();
     const [subcategories, setSubcategories] = useState([
         'Car',
         'Bus',
@@ -54,12 +55,36 @@ const Update = () => {
 
     const handelFromSubmit = e => {
         e.preventDefault();
+        const formData = new FormData(e.target);
+        const updatedData = Object.fromEntries(formData);
+        updatedData.name = data.name;
+        updatedData.email = data.email;
+        updatedData._id = data._id;
+        // console.log(data) 
+        fetch(`http://localhost:5000/api/update-toy/${data._id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedData),
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                if (data.modifiedCount > 0) {
+                    toast.success('Toy Updated Successfully', {
+                        duration: 4000,
+                    });
+                    navigate('/my-toys');
+                }
+            })
     };
+
 
     useEffect(() => {
         document.title = 'Zooming Wheels | Update Toy';
     }, []);
-    
+
     return (
         <div className='mb-14'>
             <div className="mb-12">
@@ -67,7 +92,7 @@ const Update = () => {
                 <p className='text-base text-center text-secondary hover:text-primary cursor-pointer duration-300'>Please fill this form to sell your toys</p>
             </div>
             <form onSubmit={handelFromSubmit} className='w-[80%] mx-auto'>
-              
+
                 <h1 className='text-center my-4'>Toys Info</h1>
                 <div className="flex gap-7">
                     <TextField
@@ -190,6 +215,17 @@ const Update = () => {
                     Submit
                 </motion.button>
             </form>
+            <div className="w-[80%] mx-auto my-7">
+                <motion.button
+                    whileHover={{ scale: 1 }}
+                    whileTap={{ scale: 0.9 }}
+                    onClick={() => history.back()}
+                    className='bg-primary hover:bg-secondary hover:text-white duration-500 px-5 w-full py-2 text-black rounded-lg font-bold'
+                >
+                    
+                    Back 
+                </motion.button>
+            </div>
         </div>
     );
 };
