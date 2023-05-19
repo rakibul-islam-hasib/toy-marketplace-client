@@ -21,7 +21,7 @@ const router = createBrowserRouter([
             { path: 'register', element: <Register /> },
             { path: '/add-toy', element: <Privet> <AddToy /></Privet> },
             { path: '/toys', element: <Toys />, loader: () => fetch('http://localhost:5000/api/total-toys') },
-            { path: '/toy/:id', element: <Details />, loader: ({ params }) => fetch(`http://localhost:5000/api/toy/${params.id}`) }, 
+            { path: '/toy/:id', element: <Privet><Details /></Privet>, loader: ({ params }) => fetch(`http://localhost:5000/api/toy/${params.id}`) }, 
             {path : 'my-toys' , element : <MyToys />}
         ]
     },

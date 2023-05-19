@@ -115,7 +115,7 @@ const NavBar = () => {
                                     <Tooltip title={user.displayName}>
 
                                         <div className="h-11 w-16 cursor-pointer mr-3 rounded-full">
-                                            <img src={user.photoURL} alt="" className="h-full w-full rounded-full" />
+                                            <img src={user.photoURL ? user.photoURL : 'https://i.ibb.co/5KZqJ8F/icons8-name-480.png'} alt="" className="h-full w-full rounded-full" />
                                         </div>
                                     </Tooltip>
                                 )}

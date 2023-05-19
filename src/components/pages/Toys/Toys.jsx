@@ -48,7 +48,7 @@ const Toys = () => {
                     <button className="h-10 px-4 text-xs bg-blue-500 border border-l-0 border-blue-500 rounded-r shadow-sm text-blue-50 hover:text-white hover:bg-blue-400 hover:border-blue-400 focus:outline-none">Subscribe</button>
                 </div>
             </div>
-
+        {/* Data Table */}
             <div className="shadow-lg rounded-lg overflow-hidden mx-4 md:mx-10">
                 <table className="w-full table-fixed">
                     <thead>
