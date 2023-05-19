@@ -1,9 +1,11 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const ShopCard = ({toy}) => {
-    const {name, price, photo , toyName} = toy;
+    const {name, price, photo , toyName , quantity , _id} = toy;
+    const navigate = useNavigate();
     return (
-        <div className="w-80 bg-white shadow rounded">
+        <div className="w-80 mt-5 bg-white shadow rounded">
             <div className="h-48 w-full bg-gray-200 flex flex-col justify-between p-4 bg-cover bg-center"
                 style={{backgroundImage: `url(${photo})`}}>
                
@@ -28,7 +30,7 @@ const ShopCard = ({toy}) => {
                     </button>
                     <div
                         className="bg-gray-100 border-t border-b border-gray-100 text-gray-600 hover:bg-gray-100 inline-flex items-center px-4 py-1 select-none">
-                        2
+                       {quantity}
                     </div>
                     <button
                         className="bg-white rounded-r border text-gray-600 hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50 inline-flex items-center px-2 py-1 border-r border-gray-200">
@@ -40,6 +42,7 @@ const ShopCard = ({toy}) => {
                 </div>
 
                 <button
+                onClick={()=>navigate(`/toy/${_id}`)}
                     className="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 active:bg-blue-700 disabled:opacity-50 mt-4 w-full flex items-center justify-center">
                     Add to order
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 ml-2" fill="none" viewBox="0 0 24 24"
