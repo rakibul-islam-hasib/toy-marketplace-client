@@ -75,6 +75,7 @@ const ShopByCategory = () => {
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <Tabs
             value={value} variant="scrollable"
+            allowScrollButtonsMobile
             scrollButtons="auto" onChange={handleChange} aria-label="basic tabs example">
             {toyVehicles.map((vehicle, index) => (
               <Tab key={index} label={vehicle.category} value={index} />
@@ -82,7 +83,7 @@ const ShopByCategory = () => {
           </Tabs>
         </Box>
         <TabPanel value={value} index={value}>
-          <Tabs value={nestedValue} variant="scrollable" scrollButtons="auto"  onChange={handleChangeNested} aria-label="nested tabs example">
+          <Tabs value={nestedValue} variant="scrollable" scrollButtons="auto" allowScrollButtonsMobile  onChange={handleChangeNested} aria-label="nested tabs example">
             {toyVehicles[value].subcategories.map((subcategory, index) => (
               <Tab key={index} label={subcategory} value={index} />
             ))}
