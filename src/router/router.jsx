@@ -6,7 +6,7 @@ import Login from "../components/user/Login";
 import Register from "../components/user/Register";
 import AddToy from "../components/actions/AddToy";
 import Privet from "./Privet";
-import Toys from "../components/pages/Toys";
+import Toys from "../components/pages/Toys/Toys";
 
 const router = createBrowserRouter([
     {
@@ -18,7 +18,7 @@ const router = createBrowserRouter([
             { path: 'login', element: <Login /> },
             { path: 'register', element: <Register /> },
             { path: '/add-toy', element: <Privet> <AddToy /></Privet> },
-            { path: '/toys', element: <Toys /> }
+            { path: '/toys', element: <Toys /> , loader : ()=> fetch('http://localhost:5000/api/total-toys') }
         ]
     },
 ]);
