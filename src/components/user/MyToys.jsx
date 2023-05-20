@@ -108,7 +108,7 @@ const MyToys = () => {
                                     <td className="py-4 px-6 border-b border-gray-200">
                                         <span
                                         onClick={()=>navigate(`/update/${toy._id}`)}
-                                        className="bg-green-500 mr-3 inline-flex items-center gap-2 text-white py-1 px-2 rounded-full text-xs"><AiFillEdit /> Edit</span>
+                                        className="bg-green-500 cursor-pointer mr-3 inline-flex items-center gap-2 text-white py-1 px-2 rounded-full text-xs"><AiFillEdit /> Edit</span>
                                         <span
                                          onClick={() => handelDelete(toy._id)}
                                           className="bg-red-500 inline-flex items-center gap-2 cursor-pointer text-white py-1 px-2 rounded-full text-xs"><MdDeleteSweep /> Delete</span>

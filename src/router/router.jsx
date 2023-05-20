@@ -23,8 +23,8 @@ const router = createBrowserRouter([
             { path: '/add-toy', element: <Privet> <AddToy /></Privet> },
             { path: '/toys', element: <Toys />, loader: () => fetch('http://localhost:5000/api/total-toys') },
             { path: '/toy/:id', element: <Privet><Details /></Privet>, loader: ({ params }) => fetch(`http://localhost:5000/api/toy/${params.id}`) }, 
-            {path : 'my-toys' , element : <MyToys />}, 
-            {path : '/update/:id' , element: <Update /> , loader: ({ params }) => fetch(`http://localhost:5000/api/toy/${params.id}`)}
+            {path : 'my-toys' , element :<Privet> <MyToys /></Privet>}, 
+            {path : '/update/:id' , element: <Privet><Update /></Privet> , loader: ({ params }) => fetch(`http://localhost:5000/api/toy/${params.id}`)}
         ]
     },
 ]);
