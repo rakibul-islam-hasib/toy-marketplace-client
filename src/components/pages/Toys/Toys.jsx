@@ -42,7 +42,9 @@ const Toys = () => {
             {/* Title  */}
             <SearchHero />
             {/* Search bar */}
+
             <div className='my-8 w-[25%] mx-auto'>
+                <h1 className='text-center'>Search your favorite toys</h1>
                 <label htmlFor="input-9" className="block text-sm font-medium text-gray-700 dark:text-gray-100">Search..</label>
                 <div className="flex items-center mt-1">
                     <input onChange={(e) => setSearchQuery(e.target.value)} type="text" className="w-full h-10 px-3 text-xs text-gray-700 border border-r-0 rounded-r-none border-blue-500 focus:outline-none rounded shadow-sm" placeholder="Search...." />
@@ -68,9 +70,9 @@ const Toys = () => {
                     </thead>
                     <tbody className="bg-white">
                         {
-                            data.length == 0 ? <div className="">
-                                <h1 className='text-center my-7 text-2xl font-bold text-red-500'>No Data Found</h1>
-                            </div> :
+                            data.length == 0 ? <tr className="">
+                                <td className='text-center my-7 text-2xl font-bold text-red-500'>No Data Found</td>
+                            </tr> :
                                 data.map(toy => <tr onContextMenu={(e) => e.preventDefault()} key={toy._id}>
                                     <td className="py-4 px-6 border-b border-gray-200">
                                         <img src={toy.photo} className='h-24 w-24' alt="" />
