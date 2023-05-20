@@ -15,7 +15,7 @@ const navLinks = [
     {
         name: 'All Toys',
         route: '/toys'
-    }, 
+    },
     {
         name: 'Blog',
         route: '/blog'
@@ -96,9 +96,9 @@ const NavBar = () => {
                                 {navLinks.map((link) => (
                                     <li key={link.route}>
                                         <NavLink
-                                            className='font-bold text-white hover:text-primary duration-300'
+                                            className={({ isActive }) => `font-bold ${isActive ? 'text-primary' : 'text-white'} hover:text-primary duration-300`}
                                             to={link.route}
-                                            
+
                                             style={{ whiteSpace: 'nowrap' }}
                                         >
                                             {link.name}
@@ -143,20 +143,45 @@ const NavBar = () => {
                             initial={{ opacity: 0, height: 0 }}
                             animate={{ opacity: 1, height: 'auto' }}
                             exit={{ opacity: 0, height: 0 }}
-                            transition={{ duration: 0.3 }}
+                            transition={{ duration: 0.5 }}
                         >
-                            <a
-                                href="/"
-                                className="block text-gray-300 hover:text-white px-3 py-2 rounded-md text-base font-medium"
-                            >
-                                Home
-                            </a>
-                            <a
-                                href="/about"
-                                className="block text-gray-300 hover:text-white px-3 py-2 rounded-md text-base font-medium"
-                            >
-                                About
-                            </a>
+                            {
+                                navLinks.map((link) => (
+                                    <NavLink
+                                        key={link.route}
+                                        className={({ isActive }) => `block ${isActive ? 'text-primary' : 'text-white'} px-4 py-2  hover:text-primary duration-300`}
+                                        to={link.route}
+                                        onClick={toggleMobileMenu}
+                                    >
+                                        {link.name}
+                                    </NavLink>
+                                ))
+
+                            }
+
+                            <div className="">
+                                {/* Display User Image */}
+                                {user && (
+                                    <Tooltip title={user.displayName}>
+
+                                        <div className="h-11 w-16 cursor-pointer mr-3 rounded-full">
+                                            <img src={user.photoURL ? user.photoURL : 'https://i.ibb.co/5KZqJ8F/icons8-name-480.png'} alt="" className="h-full w-full rounded-full" />
+                                        </div>
+                                    </Tooltip>
+                                )}
+                                <div className="my-3 pb-3">
+                                    {user ? (
+                                        <Button w onClick={logOut}>Logout</Button>
+                                    ) : isLogin ? (
+                                        <Button w onClick={() => navigate('/register')}>Register</Button>
+                                    ) : (
+
+                                        <Button w onClick={() => navigate('/login')}>Login</Button>
+
+                                    )}
+                                </div>
+
+                            </div>
                             {/* Add more mobile menu links as needed */}
                         </motion.div>
                     )}
