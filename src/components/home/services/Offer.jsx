@@ -2,7 +2,7 @@ import React from 'react';
 
 const Service = () => {
     return (
-        <>
+        <div data-aos="zoom-in">
             <div className="text-center  mx-auto mt-16">
                 <h1 className='text-5xl mb-3 uppercase font-catamaran font-bold'>Explore our weekly offer </h1>
                 <div className="w-[40%] mx-auto">
@@ -10,7 +10,7 @@ const Service = () => {
                 </div>
             </div>
 
-            <div className='w-[80%] flex justify-center mt-20 gap-3 mx-auto'>
+            <div  className='w-[80%] flex justify-center mt-20 gap-3 mx-auto'>
                 <div className="">
                     <img src="https://i.ibb.co/NYfWMCs/banner-2-809b2798-0785-402a-8296-0bb8f0147c74-1920x1920.jpg" alt="" />
                 </div>
@@ -18,7 +18,7 @@ const Service = () => {
                     <img src="https://i.ibb.co/C86pG29/banner-1-a62376f2-b44a-4dd6-ba45-67235bc9fa32-1920x1920.jpg" alt="" />
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 

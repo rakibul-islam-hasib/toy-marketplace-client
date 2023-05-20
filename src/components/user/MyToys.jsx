@@ -9,7 +9,7 @@ import Swal from 'sweetalert2';
 const MyToys = () => {
     const [data, setData] = useState([]);
     const [getTotal, setTotal] = useState(0);
-    const [age, setSort] = useState('');
+    const [sort, setSort] = useState('LtoH');
     const [currentPage, setCurrentPage] = useState(1);
     const navigate = useNavigate();
     let itemsPerPage = 10;
@@ -33,7 +33,24 @@ const MyToys = () => {
             .then(res => res.json())
             .then(data => setData(data))
     }, [currentPage]);
+    // Short by price 
+    useEffect(() => {
+        if (sort === 'LtoH') {
+            fetch(`http://localhost:5000/api/user-toys?email=${user.email}&page=${currentPage}&limit=${itemsPerPage}&sort=-1`)
 
+                .then(res => res.json())
+                .then(data => {
+                    setData(data)
+                })
+        }
+        if (sort === 'hToL') {
+            fetch(`http://localhost:5000/api/user-toys?email=${user.email}&page=${currentPage}&limit=${itemsPerPage}&sort=1`)
+                .then(res => res.json())
+                .then(data => {
+                    setData(data)
+                })
+        }
+    }, [sort, currentPage])
 
     const handlePageChange = (event, value) => {
         setCurrentPage(value);
@@ -67,8 +84,6 @@ const MyToys = () => {
                     })
             }
         })
-        console.log(id)
-
     }
     return (
         <div className='my-11'>
@@ -86,19 +101,18 @@ const MyToys = () => {
                     </div>
                 </div>
                 <div className="">
-                    <Box sx={{ minWidth: 120 }}>
+                    <Box sx={{ minWidth: 160 }}>
                         <FormControl fullWidth>
-                            <InputLabel id="demo-simple-select-label">Age</InputLabel>
+                            <InputLabel id="demo-simple-select-label">Sort BY</InputLabel>
                             <Select
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
-                                value={age}
-                                label="Age"
+                                value={sort}
+                                label="Sort By"
                                 onChange={handleChange}
                             >
-                                <MenuItem value={10}>Ten</MenuItem>
-                                <MenuItem value={20}>Twenty</MenuItem>
-                                <MenuItem value={30}>Thirty</MenuItem>
+                                <MenuItem value={'hToL'}>High to Low</MenuItem>
+                                <MenuItem value={'LtoH'}>Low to High</MenuItem>
                             </Select>
                         </FormControl>
                     </Box>

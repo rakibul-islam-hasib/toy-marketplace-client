@@ -146,6 +146,7 @@ const Update = () => {
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
                                 required
+                                // value={data.subCategory}
                                 defaultValue={data.subCategory}
                                 label="Sub Category"
                                 name='subCategory'

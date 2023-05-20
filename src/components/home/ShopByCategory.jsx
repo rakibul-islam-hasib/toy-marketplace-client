@@ -56,7 +56,7 @@ const ShopByCategory = () => {
           </Tabs>
         </Box>
         {/* Render the corresponding filtered toys */}
-        <div className='grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-3'>
+        <div  className='grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-3'>
           {filteredToys.length === 0 ? (
             <div className="text-center">
               <h1 className='text-3xl text-red-500 text-center my-3'>No Item In this category</h1>
