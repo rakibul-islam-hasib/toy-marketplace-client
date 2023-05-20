@@ -5,7 +5,7 @@ const ShopCard = ({toy}) => {
     const {name, price, photo , toyName , quantity , _id} = toy;
     const navigate = useNavigate();
     return (
-        <div className="w-80 mt-5 bg-white shadow rounded">
+        <div className="min-w-[250px] mt-5 bg-white shadow rounded">
             <div className="h-48 w-full bg-gray-200 flex flex-col justify-between p-4 bg-cover bg-center"
                 style={{backgroundImage: `url(${photo})`}}>
                

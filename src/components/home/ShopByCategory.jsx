@@ -5,68 +5,36 @@ import Box from '@mui/material/Box';
 
 import ShopCard from './ShopCard';
 
-const toyVehicles = [
-  {
-    category: 'Vehicle',
-    subcategories: ['Car', 'Bus', 'Truck', 'Motorcycle']
-  },
-  {
-    category: 'Aircraft',
-    subcategories: ['Helicopter', 'Airplane', 'Drone', 'Rocket']
-  },
-  {
-    category: 'Watercraft',
-    subcategories: ['Boat', 'Ship', 'Submarine', 'Jet Ski']
-  },
-  {
-    category: 'Construction',
-    subcategories: ['Excavator', 'Crane', 'Bulldozer', 'Dump Truck']
-  },
-  {
-    category: 'Space',
-    subcategories: ['Satellite', 'Space Shuttle', 'Rover', 'Rocket']
-  }
+const toyCategories = [
+  'Vehicle',
+  'Aircraft',
+  'Watercraft',
+  'Construction',
+  'Space'
 ];
 
 const ShopByCategory = () => {
   const [value, setValue] = useState(0);
-  const [nestedValue, setNestedValue] = useState(0);
   const [allToys, setAllToys] = useState([]);
   const [filteredToys, setFilteredToys] = useState([]);
 
   useEffect(() => {
     fetch('http://localhost:5000/api/all-toys')
       .then(res => res.json())
-      .then(data => setAllToys(data))
+      .then(data => {
+        setAllToys(data);
+        setFilteredToys(data.filter(toy => toy.category === toyCategories[0]));
+      });
   }, []);
 
   useEffect(() => {
-    if (nestedValue >= 0 && nestedValue < toyVehicles[value].subcategories.length) {
-      const subcategory = toyVehicles[value].subcategories[nestedValue];
-      const remaining = allToys.filter(toy => toy.subCategory === subcategory);
-      setFilteredToys(remaining);
-    }
-  }, [nestedValue, allToys, value]);
+    const category = toyCategories[value];
+    const remaining = allToys.filter(toy => toy.category === category);
+    setFilteredToys(remaining);
+  }, [value, allToys]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
-  };
-
-  const handleChangeNested = (event, newValue) => {
-    setNestedValue(newValue);
-  };
-
-  const TabPanel = ({ value, index, children }) => {
-    return (
-      <div
-        role="tabpanel"
-        hidden={value !== index}
-        id={`tabpanel-${index}`}
-        aria-labelledby={`tab-${index}`}
-      >
-        {value === index && <div>{children}</div>}
-      </div>
-    );
   };
 
   return (
@@ -82,30 +50,23 @@ const ShopByCategory = () => {
             value={value} variant="scrollable"
             allowScrollButtonsMobile
             scrollButtons="auto" onChange={handleChange} aria-label="basic tabs example">
-            {toyVehicles.map((vehicle, index) => (
-              <Tab key={index} label={vehicle.category} value={index} />
+            {toyCategories.map((category, index) => (
+              <Tab key={index} label={category} value={index} />
             ))}
           </Tabs>
         </Box>
-        <TabPanel value={value} index={value}>
-          <Tabs value={nestedValue} variant="scrollable" scrollButtons="auto" allowScrollButtonsMobile  onChange={handleChangeNested} aria-label="nested tabs example">
-            {toyVehicles[value].subcategories.map((subcategory, index) => (
-              <Tab key={index} label={subcategory} value={index} />
-            ))}
-          </Tabs>
-          {/* Render the corresponding filtered toys */}
-          <div className='flex flex-wrap gap-3'>
-            {filteredToys.length === 0 ? (
-              <div className="text-center">
-                <h1 className='text-3xl text-red-500 text-center my-3'>No Item In this category</h1>
-              </div>
-            ) : (
-              filteredToys.map(toy => (
-                <ShopCard key={toy._id} toy={toy} />
-              ))
-            )}
-          </div>
-        </TabPanel>
+        {/* Render the corresponding filtered toys */}
+        <div className='grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-3'>
+          {filteredToys.length === 0 ? (
+            <div className="text-center">
+              <h1 className='text-3xl text-red-500 text-center my-3'>No Item In this category</h1>
+            </div>
+          ) : (
+            filteredToys.map(toy => (
+              <ShopCard key={toy._id} toy={toy} />
+            ))
+          )}
+        </div>
       </Box>
     </div>
   );

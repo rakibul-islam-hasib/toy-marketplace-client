@@ -15,6 +15,10 @@ const navLinks = [
     {
         name: 'All Toys',
         route: '/toys'
+    }, 
+    {
+        name: 'Blog',
+        route: '/blog'
     }
 ];
 
