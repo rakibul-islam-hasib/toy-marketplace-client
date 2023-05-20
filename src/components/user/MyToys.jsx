@@ -1,20 +1,23 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../provider/AuthProvider';
-import { Pagination, Stack } from '@mui/material';
+import { Box, FormControl, InputLabel, MenuItem, Pagination, Select, Stack } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { AiFillEdit } from 'react-icons/ai';
-import {MdDeleteSweep} from 'react-icons/md';
+import { MdDeleteSweep } from 'react-icons/md';
 import Swal from 'sweetalert2';
 
 const MyToys = () => {
     const [data, setData] = useState([]);
     const [getTotal, setTotal] = useState(0);
+    const [age, setSort] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const navigate = useNavigate();
     let itemsPerPage = 10;
     const totalPages = Math.ceil(getTotal / itemsPerPage);
     const { user } = useContext(AuthContext);
-
+    const handleChange = (event) => {
+        setSort(event.target.value);
+    };
     useEffect(() => {
         fetch(`http://localhost:5000/api/user-toys?email=${user.email}`)
             .then(res => res.json())
@@ -81,6 +84,25 @@ const MyToys = () => {
                     <h1 className='text-sm '><span>Email : </span><span className='hover:text-primary duration-300'>{user.email}</span> </h1>
                     <p>Total Item : {getTotal}</p>
                 </div>
+                <div className="">
+                    <Box sx={{ minWidth: 120 }}>
+                        <FormControl fullWidth>
+                            <InputLabel id="demo-simple-select-label">Age</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={age}
+                                label="Age"
+                                onChange={handleChange}
+                            >
+                                <MenuItem value={10}>Ten</MenuItem>
+                                <MenuItem value={20}>Twenty</MenuItem>
+                                <MenuItem value={30}>Thirty</MenuItem>
+                            </Select>
+                        </FormControl>
+                    </Box>
+                </div>
+
             </div>
             <div className="my-12">
                 <div className="shadow-lg rounded-lg overflow-hidden mx-4 md:mx-10">
@@ -107,11 +129,11 @@ const MyToys = () => {
                                     <td className="py-4 px-6 border-b border-gray-200">{toy.quantity} pcs</td>
                                     <td className="py-4 px-6 border-b border-gray-200">
                                         <span
-                                        onClick={()=>navigate(`/update/${toy._id}`)}
-                                        className="bg-green-500 cursor-pointer mr-3 inline-flex items-center gap-2 text-white py-1 px-2 rounded-full text-xs"><AiFillEdit /> Edit</span>
+                                            onClick={() => navigate(`/update/${toy._id}`)}
+                                            className="bg-green-500 cursor-pointer mr-3 inline-flex items-center gap-2 text-white py-1 px-2 rounded-full text-xs"><AiFillEdit /> Edit</span>
                                         <span
-                                         onClick={() => handelDelete(toy._id)}
-                                          className="bg-red-500 inline-flex items-center gap-2 cursor-pointer text-white py-1 px-2 rounded-full text-xs"><MdDeleteSweep /> Delete</span>
+                                            onClick={() => handelDelete(toy._id)}
+                                            className="bg-red-500 inline-flex items-center gap-2 cursor-pointer text-white py-1 px-2 rounded-full text-xs"><MdDeleteSweep /> Delete</span>
                                     </td>
                                 </tr>)
                             }

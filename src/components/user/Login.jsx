@@ -1,13 +1,23 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import GoogleGithubLogin from './GoogleGithubLogin';
 import { AuthContext } from '../../provider/AuthProvider';
 import { ScaleLoader } from 'react-spinners';
 
 const Login = () => {
+    const location = useLocation();
+    console.log("🚀 ~ file: Login.jsx:9 ~ Login ~ location:", location)
+    const navigate = useNavigate();
+    const [redirect, setRedirect] = useState(false);
+    const goto = location?.state?.from || '/';
     useEffect(() => {
         document.title = 'Zooming Wheels | Login';
     }, [])
+    useEffect(()=>{
+        if (redirect) {
+            navigate(goto, { replace: true });
+        }
+    },[redirect])
 
     const [handelError, setHandelError] = useState('');
     const { login, loader, setLoader, user  , error , setError} = useContext(AuthContext);
@@ -19,7 +29,7 @@ const Login = () => {
         }
     },[error])
     if (user) {
-        return <Navigate to={'/'} replace />
+        return <Navigate to={goto} replace />
     }
 
     // handel from submit 
@@ -35,6 +45,8 @@ const Login = () => {
 
         login(email, password)
             .then(result => {
+                console.log(goto, 'result');
+                navigate(goto, { replace: true });
                 setLoader(false); // Set the loader to false upon successful login
             })
             .catch(err => {
