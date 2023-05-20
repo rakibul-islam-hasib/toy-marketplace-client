@@ -72,17 +72,18 @@ const MyToys = () => {
     }
     return (
         <div className='my-11'>
-            {/* <h1 className='text-3xl text-center'>My Toys are here </h1> */}
-            <div className="w-[80%] mx-auto gap-5 flex">
-                <img
-                    onContextMenu={(e) => e.preventDefault()}
-                    className='h-32 w-32'
-                    src={user.photoURL ?
-                        user.photoURL : 'https://i.ibb.co/5KZqJ8F/icons8-name-480.png'} alt="" />
-                <div className="">
-                    <h1 className='text-3xl '>{user.displayName}</h1>
-                    <h1 className='text-sm '><span>Email : </span><span className='hover:text-primary duration-300'>{user.email}</span> </h1>
-                    <p>Total Item : {getTotal}</p>
+            <div className="w-[80%] justify-between items-center mx-auto gap-5 flex">
+                <div className="flex gap-5">
+                    <img
+                        onContextMenu={(e) => e.preventDefault()}
+                        className='h-32 w-32'
+                        src={user.photoURL ?
+                            user.photoURL : 'https://i.ibb.co/5KZqJ8F/icons8-name-480.png'} alt="" />
+                    <div className="">
+                        <h1 className='text-3xl '>{user.displayName}</h1>
+                        <h1 className='text-sm '><span>Email : </span><span className='hover:text-primary duration-300'>{user.email}</span> </h1>
+                        <p>Total Item : {getTotal}</p>
+                    </div>
                 </div>
                 <div className="">
                     <Box sx={{ minWidth: 120 }}>

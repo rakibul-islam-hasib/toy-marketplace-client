@@ -3,31 +3,31 @@ import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import GoogleGithubLogin from './GoogleGithubLogin';
 import { AuthContext } from '../../provider/AuthProvider';
 import { ScaleLoader } from 'react-spinners';
-
+import { toast } from 'react-hot-toast'
 const Login = () => {
     const location = useLocation();
     console.log("🚀 ~ file: Login.jsx:9 ~ Login ~ location:", location)
     const navigate = useNavigate();
-    const [redirect, setRedirect] = useState(false);
     const goto = location?.state?.from || '/';
     useEffect(() => {
         document.title = 'Zooming Wheels | Login';
     }, [])
-    useEffect(()=>{
-        if (redirect) {
-            navigate(goto, { replace: true });
+
+
+    useEffect(() => {
+        if (location.state?.from) {
+            toast.error("You must login first")
         }
-    },[redirect])
+    }, [])
 
     const [handelError, setHandelError] = useState('');
-    const { login, loader, setLoader, user  , error , setError} = useContext(AuthContext);
-    useEffect(()=>{
-        // console.log(error , 'this is error under useeffect')
+    const { login, loader, setLoader, user, error, setError } = useContext(AuthContext);
+    useEffect(() => {
         if (error) {
             const errorCode = error?.split('/')[1]?.split('-')?.join(' ');
             setHandelError(errorCode);
         }
-    },[error])
+    }, [error])
     if (user) {
         return <Navigate to={goto} replace />
     }

@@ -6,8 +6,8 @@ const Hero_Category_sm = () => {
         <div className='block md:hidden'>
             {
                 categories.map((category) => (
-                    <ul className='text-center flex flex-col  border gap-3 py-5' style={{backgroundColor : category.bg}} key={category.slug}>
-                        <li href={`/category/${category.slug}`} className='hover:text-primary font-medium duration-300'>{category.name}</li>
+                    <ul className='text-center flex flex-col hover:bg-primary text-black duration-300 hover:text-white  border gap-3 py-5 bg-[#446C9A]' key={category.slug}>
+                        <li href={`/category/${category.slug}`} className=' font-medium duration-300'>{category.name}</li>
                     </ul>
                 ))
 
