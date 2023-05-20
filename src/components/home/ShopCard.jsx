@@ -44,7 +44,7 @@ const ShopCard = ({toy}) => {
                 <button
                 onClick={()=>navigate(`/toy/${_id}`)}
                     className="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 active:bg-blue-700 disabled:opacity-50 mt-4 w-full flex items-center justify-center">
-                    Add to order
+                    View Details
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 ml-2" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"

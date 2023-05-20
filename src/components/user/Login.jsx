@@ -8,8 +8,16 @@ const Login = () => {
     useEffect(() => {
         document.title = 'Zooming Wheels | Login';
     }, [])
-    const [error, setError] = useState('');
-    const { login, loader, setLoader, user } = useContext(AuthContext);
+
+    const [handelError, setHandelError] = useState('');
+    const { login, loader, setLoader, user  , error , setError} = useContext(AuthContext);
+    useEffect(()=>{
+        // console.log(error , 'this is error under useeffect')
+        if (error) {
+            const errorCode = error?.split('/')[1]?.split('-')?.join(' ');
+            setHandelError(errorCode);
+        }
+    },[error])
     if (user) {
         return <Navigate to={'/'} replace />
     }
@@ -18,21 +26,22 @@ const Login = () => {
     const handelFormSubmit = e => {
         e.preventDefault();
         setError('');
-        // get the from input data as a object
+        setLoader(true); // Set the loader to true before the login process begins
+
+        // get the form input data as an object
         const formData = new FormData(e.target);
         const data = Object.fromEntries(formData);
         const { email, password } = data;
+
         login(email, password)
             .then(result => {
-                setLoader(false);
+                setLoader(false); // Set the loader to false upon successful login
             })
             .catch(err => {
-                setLoader(false);
-                console.log(err.code);
-                const errorCode = error?.code?.split('/')[1]?.split('-')?.join(' ');
-                setError(errorCode);
-            })
-    }
+                setError(err.code);
+                setLoader(false); // Set the loader to false in case of an error
+            });
+    };
     return (
         loader ? <div className="h-screen flex justify-center items-center">
             <ScaleLoader
@@ -66,7 +75,7 @@ const Login = () => {
                                 </div>
                                 {/* Email Password Login  */}
                                 <form onSubmit={handelFormSubmit} className="mx-auto max-w-xs">
-                                    <p className='text-center text-red-500 uppercase text-[13px] mb-3'>{error}</p>
+                                    <p className='text-center text-red-500 uppercase text-[13px] mb-3'>{handelError}</p>
                                     <input
                                         className="w-full px-8 mt-5 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                                         type="email"

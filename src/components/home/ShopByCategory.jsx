@@ -71,6 +71,11 @@ const ShopByCategory = () => {
 
   return (
     <div className='w-[90%] mx-auto my-12'>
+      <div className="">
+        <h1 className='text-5xl w-[60%] mx-auto my-3 text-center'>Shop By Category</h1>
+        <p className='text-center my-6'>Explore a world of endless possibilities as you shop by category in our toy store. <br /> From action figures to puzzles, find the perfect toy for every child's interest and let their imaginations soar.</p>
+      </div>
+
       <Box sx={{ width: '100%' }}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <Tabs

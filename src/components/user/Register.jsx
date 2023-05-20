@@ -10,8 +10,15 @@ const Register = () => {
         document.title = 'Zooming Wheels | Register';
     }, [])
     // Get data from context
-    const { user, loader, setLoader, handelSignUp, updateUserName } = useContext(AuthContext);
-    const [error , setError] = useState('');
+    const { user, loader, setLoader, handelSignUp, updateUserName , error , setError } = useContext(AuthContext);
+    // const [error , setError] = useState('');
+    const [handelError, setHandelError] = useState('')
+    useEffect(()=>{
+        if (error) {
+            const errorCode = error?.split('/')[1]?.split('-')?.join(' ');
+            setHandelError(errorCode);
+        }
+    },[error])
     // If user is already logged in then redirect to home page
     if (user) {
         return <Navigate to='/' replace />
@@ -38,11 +45,10 @@ const Register = () => {
                     })
             }
             )
-            .catch(error => {
-                setLoader(false);
+            .catch(err => {
                 // Make this error message more user friendly
-                const errorCode = error?.code?.split('/')[1]?.split('-')?.join(' ');
-                setError(errorCode);
+                setError(err.code);
+                setLoader(false);
             });
     }
     return (
@@ -73,7 +79,7 @@ const Register = () => {
                             </div>
                             {/* Email Password Login  */}
                             <form onSubmit={handelFormSubmit} className="mx-auto max-w-xs">
-                                <p className='text-center text-red-500 uppercase text-[13px] mb-3'>{error}</p>
+                                <p className='text-center text-red-500 uppercase text-[13px] mb-3'>{handelError}</p>
                                 <input
                                     className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                                     type="text"

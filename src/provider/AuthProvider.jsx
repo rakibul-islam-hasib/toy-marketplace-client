@@ -10,20 +10,32 @@ const AuthProvider = ({ children }) => {
     // state are managed here
     const [user, setUser] = useState(null);
     const [loader, setLoader] = useState(true);
-
+    const [error, setError] = useState(null)
     const auth = getAuth(app);
     const google = new GoogleAuthProvider();
     const github = new GithubAuthProvider();
-    const handelSignUp = (email, password) => {
+    const handelSignUp = async (email, password) => {
         setLoader(true);
-        return createUserWithEmailAndPassword(auth, email, password);
+        try {
+            return createUserWithEmailAndPassword(auth, email, password);
+        } catch (error) {
+            setLoader(false);
+            throw error;
+        }
     };
     const updateUserName = (name, photo) => {
-        updateProfile(auth.currentUser, { displayName: name, photoURL: photo })
+        return updateProfile(auth.currentUser, { displayName: name, photoURL: photo })
     };
-    const login = (email, password) => {
+    const login = async (email, password) => {
         setLoader(true);
-        return signInWithEmailAndPassword(auth, email, password);
+        try {
+            return signInWithEmailAndPassword(auth, email, password);
+        } catch (error) {
+            setLoader(false);
+            console.log(error.code, 'this is error code under login')
+            setError(error.code);
+            throw error;
+        }
     };
     const googleLogin = () => {
         setLoader(true);
@@ -45,7 +57,7 @@ const AuthProvider = ({ children }) => {
     }, [])
 
 
-    const value = { user, loader, setLoader, handelSignUp, updateUserName, handelLogout, login , googleLogin , githubLogin}
+    const value = { user, loader, setLoader, handelSignUp, updateUserName, handelLogout, login, googleLogin, githubLogin, error, setError }
     return (
         <AuthContext.Provider value={value}>
             {children}
