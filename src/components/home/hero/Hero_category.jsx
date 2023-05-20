@@ -40,8 +40,8 @@ const Hero_category = () => {
             <div className="h-full">
                 <ul>
                     {categories.map((category) => (
-                        <li className={`text-center py-5`} style={{ backgroundColor: category.bg }} key={category.slug}>
-                            <a href={`/category/${category.slug}`} className='hover:text-primary text-white font-medium duration-300'>{category.name}</a>
+                        <li className={`text-center hover:bg-primary duration-500 py-5 bg-[#446C9A]`}  key={category.slug}>
+                            <a href={`/category/${category.slug}`} className='hover:text-black text-white font-medium duration-300'>{category.name}</a>
                         </li>
                     ))}
                 </ul>

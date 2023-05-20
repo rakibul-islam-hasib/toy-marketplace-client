@@ -1,13 +1,18 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../../provider/AuthProvider';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const GoogleGithubLogin = () => {
-
+    const location = useLocation();
+    const navigate = useNavigate();
     const { googleLogin, githubLogin, setLoader } = useContext(AuthContext);
+    const goTo = location.state?.from || '/' ; 
     const handelGoogleLogin = () => {
         setLoader(true)
         googleLogin()
-            .then(() => { })
+            .then(() => { 
+                navigate(goTo)
+            })
             .catch(err => {
                 setLoader(false)
                 console.log(err.code)
@@ -16,7 +21,9 @@ const GoogleGithubLogin = () => {
     const handelGithubLogin = () => {
         setLoader(true)
         githubLogin()
-            .then(() => {})
+            .then(() => {
+                navigate(goTo)
+            })
             .catch(err => {
                 setLoader(false)
                 console.log(err.code)
