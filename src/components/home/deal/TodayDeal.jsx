@@ -4,7 +4,6 @@ import DealCard from './DealCard';
 
 const TodayDeal = () => {
     const [data, setData] = useState([]); 
-    console.log("🚀 ~ file: TodayDeal.jsx:5 ~ TodayDeal ~ data:", data)
 
     useEffect(()=>{
         fetch('http://localhost:5000/api/today-deal')

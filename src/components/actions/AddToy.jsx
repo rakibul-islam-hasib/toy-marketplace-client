@@ -8,54 +8,34 @@ import { motion } from 'framer-motion';
 const toyVehicles = [
     {
         category: 'Vehicle',
-        subcategories: ['Car', 'Bus', 'Truck', 'Motorcycle']
     },
     {
         category: 'Aircraft',
-        subcategories: ['Helicopter', 'Airplane', 'Drone', 'Rocket']
     },
     {
         category: 'Watercraft',
-        subcategories: ['Boat', 'Ship', 'Submarine', 'Jet Ski']
     },
     {
         category: 'Construction',
-        subcategories: ['Excavator', 'Crane', 'Bulldozer', 'Dump Truck']
     },
     {
         category: 'Space',
-        subcategories: ['Satellite', 'Space Shuttle', 'Rover', 'Rocket']
     }
 ];
 
 const AddToy = () => {
     const nameRef = useRef(null);
     const { user } = useContext(AuthContext);
-    const [category, setCategory] = useState('');
-    const [subcategory, setSubcategory] = useState('');
-    const [subcategories, setSubcategories] = useState([
-        'Car',
-        'Bus',
-        'Truck',
-        'Motorcycle',
-    ]);
-
+    const [category, setCategory] = useState('Vehicle');
     const handelCategoryChange = e => {
         setCategory(e.target.value);
-        const selectedCategory = toyVehicles.find(
-            vehicle => vehicle.category === e.target.value
-        );
-        if (selectedCategory) {
-            setSubcategories(selectedCategory.subcategories);
-        } else {
-            setSubcategories([]);
-        }
     };
 
     const handelFromSubmit = e => {
         e.preventDefault();
         const formData = new FormData(e.target);
         const data = Object.fromEntries(formData);
+        
         fetch(`http://localhost:5000/api/add-toy`, {
             method: 'POST',
             headers: {
@@ -75,7 +55,7 @@ const AddToy = () => {
                     );
                 }
             });
-        console.log(data);
+        console.log(data); 
     };
 
     useEffect(() => {
@@ -131,7 +111,7 @@ const AddToy = () => {
                         className='w-full mb-5'
                     />
                 </div>
-                <h1 className='text-center my-4'>Category And Sub Category</h1>
+                <h1 className='text-center my-4'>Category And Quantity </h1>
                 <div className="flex gap-7">
                     <Box sx={{ width: '100%' }}>
                         <FormControl fullWidth>
@@ -141,7 +121,7 @@ const AddToy = () => {
                                 id="demo-simple-select"
                                 required
                                 label="Category"
-                                name='category'
+                                name='subCategory'
                                 defaultValue={'Vehicle'}
                                 onChange={handelCategoryChange}
                             >
@@ -153,25 +133,14 @@ const AddToy = () => {
                             </Select>
                         </FormControl>
                     </Box>
-                    <Box sx={{ width: '100%' }}>
-                        <FormControl fullWidth>
-                            <InputLabel id="demo-simple-select-label">Sub Category</InputLabel>
-                            <Select
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-select"
-                                required
-                                defaultValue={'car'}
-                                label="Sub Category"
-                                name='subCategory'
-                            >
-                                {subcategories.map((subCategory, index) => (
-                                    <MenuItem key={index} value={subCategory}>
-                                        {subCategory}
-                                    </MenuItem>
-                                ))}
-                            </Select>
-                        </FormControl>
-                    </Box>
+                    <TextField
+                        id="outlined-basic"
+                        name='quantity'
+                        required
+                        label="Quantity"
+                        variant="outlined"
+                        className='w-full mb-5'
+                    />
                 </div>
                 <h1 className='text-center my-4'>Price & Ratings</h1>
                 <div className="flex gap-7">
@@ -193,17 +162,6 @@ const AddToy = () => {
                     />
                 </div>
                 <div className="">
-                    <h1 className='text-center my-4'>Quantity & Photo</h1>
-                    <div className="flex gap-7">
-                        <TextField
-                            id="outlined-basic"
-                            name='quantity'
-                            required
-                            label="Quantity"
-                            variant="outlined"
-                            className='w-full mb-5'
-                        />
-                    </div>
                     <legend>Description</legend>
                     <textarea
                         className='w-full resize-none border-2 outline-none rounded-md p-3   mb-5'

@@ -1,6 +1,7 @@
 import React from 'react';
 import footerImg from '../../assets/footer.webp';
 import { Link } from 'react-router-dom';
+import ytLogo from '../../assets/ytLogo.svg'
 const Footer = () => {
     return (
         <footer className="px-3 pt-4 lg:px-9 border-t-2 bg-gray-50">
@@ -33,12 +34,12 @@ const Footer = () => {
                     <p className="text-base font-bold tracking-wide text-gray-900">WE ARE ALSO AVAILABLE ON</p>
                     <div className="flex items-center gap-1 px-2">
                         <Link to={'/'} className="w-full min-w-xl">
-                            <img src="https://mcqmate.com/public/images/icons/playstore.svg" alt="Playstore Button"
-                                className="h-10" />
+                            <img src="https://i.ibb.co/pKsQj6n/5a902dbf7f96951c82922875.png" alt="Playstore Button"
+                                className="h-14" />
                         </Link>
-                        <Link className="w-full min-w-xl" href="https://www.youtube.com/channel/UCo8tEi6SrGFP8XG9O0ljFgA">
-                            <img src="https://mcqmate.com/public/images/icons/youtube.svg" alt="Youtube Button"
-                                className="h-28" />
+                        <Link className="w-full min-w-xl" >
+                            <img src={ytLogo} alt="Youtube Button"
+                                className="h-20" />
                         </Link>
                     </div>
                     <p className="text-base font-bold tracking-wide text-gray-900">Contacts</p>

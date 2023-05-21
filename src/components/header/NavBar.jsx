@@ -6,7 +6,7 @@ import Button from '../hooks/Button';
 import { AuthContext } from '../../provider/AuthProvider';
 import Swal from 'sweetalert2';
 import Tooltip from '@mui/material/Tooltip';
-
+import { FcSettings } from 'react-icons/fc';
 const navLinks = [
     {
         name: 'Home',
@@ -75,7 +75,7 @@ const NavBar = () => {
                 <div className="flex px-4 items-center justify-between py-5">
                     {/* Logo */}
                     <div className="flex-shrink-0 pl-7 md:p-0 flex items-center">
-                        <h1 onClick={() => navigate('/')} className='text-2xl cursor-pointer font-bold'>Zooming Wheels</h1>
+                        <h1 onClick={() => navigate('/')} className='text-2xl inline-flex items-center gap-3 cursor-pointer font-bold'><span className='text-5xl'><FcSettings /></span> Zooming Wheels</h1>
                     </div>
 
                     {/* Mobile Menu Icon */}

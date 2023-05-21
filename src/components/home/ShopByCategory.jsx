@@ -23,13 +23,13 @@ const ShopByCategory = () => {
       .then(res => res.json())
       .then(data => {
         setAllToys(data);
-        setFilteredToys(data.filter(toy => toy.category === toyCategories[0]));
+        setFilteredToys(data.filter(toy => toy.subCategory === toyCategories[0]));
       });
   }, []);
 
   useEffect(() => {
     const category = toyCategories[value];
-    const remaining = allToys.filter(toy => toy.category === category);
+    const remaining = allToys.filter(toy => toy.subCategory === category);
     setFilteredToys(remaining);
   }, [value, allToys]);
 
