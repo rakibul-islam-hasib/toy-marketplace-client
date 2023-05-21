@@ -5,7 +5,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 import "./style.css";
 
 const images = [
