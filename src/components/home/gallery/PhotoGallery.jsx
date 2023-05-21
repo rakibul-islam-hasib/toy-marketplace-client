@@ -9,7 +9,7 @@ import "swiper/css/pagination";
 import "./style.css";
 
 // import required modules
-import { EffectCoverflow, Pagination } from "swiper";
+import { EffectCoverflow, Pagination ,Autoplay } from "swiper";
 const PhotoGallery = () => {
     return (
         <div className='w-[80%] mx-auto'>
@@ -30,7 +30,7 @@ const PhotoGallery = () => {
                     slideShadows: true,
                 }}
                 pagination={true}
-                modules={[EffectCoverflow, Pagination]}
+                modules={[EffectCoverflow, Pagination , Autoplay]}
                 className="mySwiper"
             >
                 <SwiperSlide className='swiper-slide-img'>
