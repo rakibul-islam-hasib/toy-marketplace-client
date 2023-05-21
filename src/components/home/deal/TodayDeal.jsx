@@ -15,7 +15,7 @@ const TodayDeal = () => {
 
     return (
         <div>
-            <div className="text-center  mx-auto mt-16">
+            <div  className="text-center  mx-auto mt-16">
                 <h1 className='text-5xl mb-3 uppercase font-catamaran font-bold'>Today's Deals</h1>
                 <div className="w-[40%] mx-auto">
                     <p className='my-7 text-sm'>Every week, we bring you a carefully curated selection of the hottest and most popular toys that will ignite your child's imagination and bring joy to their playtime. Our team of toy experts scours the market to handpick the best toys, ensuring that each item is of the highest quality and designed to provide endless hours of fun.</p>
@@ -25,9 +25,10 @@ const TodayDeal = () => {
                     <h1 className=''>Visit daily for best offer</h1>
                 </div>
             </div>
-                <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 w-[90%] mx-auto">
+                <div data-aos="flip-up" className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 w-[90%] mx-auto">
                     {
                         data.map(item => <div
+                        
                             className='w-[90%] 
                      border hover:border-0 hover:-translate-y-3 duration-300 px-5 relative mx-auto my-4' key={item._id}>
                             <img src={item.photo} alt="" className='sm:max-w-[250px] w-full min-h-[300px]' />

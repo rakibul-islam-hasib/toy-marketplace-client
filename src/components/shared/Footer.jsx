@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 import ytLogo from '../../assets/ytLogo.svg'
 const Footer = () => {
     return (
-        <footer className="px-3 pt-4 lg:px-9 border-t-2 bg-gray-50">
+        <footer >
+            <div className="px-3 pt-6 lg:px-9 border-t-2 bg-gray-50">
             <div className="grid gap-10 row-gap-6 mb-8 sm:grid-cols-2 lg:grid-cols-4">
 
                 <div className="sm:col-span-2">
@@ -52,7 +53,7 @@ const Footer = () => {
             </div>
 
             <div className="flex flex-col-reverse justify-between pt-5 pb-10 border-t lg:flex-row">
-                <p className="text-sm text-gray-600">© Copyright 2023 Company. All rights reserved.</p>
+                <p className="text-sm text-gray-600">© Copyright 2023 Zooming Wheels . All rights reserved.</p>
                 <ul className="flex flex-col mb-3 space-y-2 lg:mb-0 sm:space-y-0 sm:space-x-5 sm:flex-row">
                     <li>
                         <Link to={'/'}
@@ -66,6 +67,7 @@ const Footer = () => {
                         </Link>
                     </li>
                 </ul>
+            </div>
             </div>
             <img src={footerImg} className='w-full' alt="" />
         </footer>

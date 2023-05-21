@@ -47,11 +47,14 @@ const Toys = () => {
                 <h1 className='text-center'>Search your favorite toys</h1>
                 <label htmlFor="input-9" className="block text-sm font-medium text-gray-700 dark:text-gray-100">Search..</label>
                 <div className="flex items-center mt-1">
-                    <input onChange={(e) => setSearchQuery(e.target.value)} type="text" className="w-full h-10 px-3 text-xs text-gray-700 border border-r-0 rounded-r-none border-blue-500 focus:outline-none rounded shadow-sm" placeholder="Search...." />
-                    <button
-                        onClick={() => setReset(!reset)}
-                        className="h-10 px-4 text-xs bg-blue-500 border border-l-0 border-blue-500 rounded-r shadow-sm text-blue-50 hover:text-white hover:bg-blue-400 hover:border-blue-400 focus:outline-none">
-                        Reset</button>
+                        <input onChange={(e) => setSearchQuery(e.target.value)} value={searchQuery} type="text" className="w-full h-10 px-3 text-xs text-gray-700 border border-r-0 rounded-r-none border-blue-500 focus:outline-none rounded shadow-sm" placeholder="Start typing for search..." />
+                        <button
+                            onClick={() => {
+                                setReset(!reset)
+                                setSearchQuery('')
+                            }}
+                            className="h-10 px-4 text-xs bg-blue-500 border border-l-0 border-blue-500 rounded-r shadow-sm text-blue-50 hover:text-white hover:bg-blue-400 hover:border-blue-400 focus:outline-none">
+                            Reset</button>
                 </div>
             </div>
             {/* Data Table */}

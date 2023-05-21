@@ -4,6 +4,7 @@ import GoogleGithubLogin from './GoogleGithubLogin';
 import { AuthContext } from '../../provider/AuthProvider';
 import { ScaleLoader } from 'react-spinners';
 import { toast } from 'react-hot-toast'
+import Swal from 'sweetalert2';
 const Login = () => {
     const location = useLocation();
     console.log("🚀 ~ file: Login.jsx:9 ~ Login ~ location:", location)
@@ -16,7 +17,11 @@ const Login = () => {
 
     useEffect(() => {
         if (location.state?.from) {
-            toast.error("You must login first")
+            Swal.fire(
+                'Login..!',
+                'You need to login first....!',
+                'error'
+              )
         }
     }, [])
 
