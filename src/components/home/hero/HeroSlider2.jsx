@@ -1,5 +1,5 @@
 import React from 'react';
-import bgImg from '../../../assets/hero_bg_1.jpg'
+import bgImg from '../../../assets/hero_bg_2.jpg'
 const HeroSlider2 = () => {
     return (
         <div style={{ backgroundImage: `url(${bgImg})` }} className='w-full bg-fixed bg-cover h-full  flex justify-center items-center  mx-auto'>

@@ -13,11 +13,15 @@ import { EffectCoverflow, Pagination } from "swiper";
 const PhotoGallery = () => {
     return (
         <div className='w-[80%] mx-auto'>
-            <Swiper
-                effect={"coverflow"}
+            <Swiper         effect={"coverflow"}
                 grabCursor={true}
                 centeredSlides={true}
                 slidesPerView={"auto"}
+                loop={true}
+                autoplay={{
+                    delay: 2500,
+                    disableOnInteraction: false,
+                }}
                 coverflowEffect={{
                     rotate: 50,
                     stretch: 0,
@@ -29,32 +33,23 @@ const PhotoGallery = () => {
                 modules={[EffectCoverflow, Pagination]}
                 className="mySwiper"
             >
-                <SwiperSlide>
+                <SwiperSlide className='swiper-slide-img'>
                     <img className='' src="https://i.ibb.co/F4hcMk7/pexels-pixabay-163768-min.jpg" />
                 </SwiperSlide>
-                <SwiperSlide>
+                <SwiperSlide className='swiper-slide-img'>
                     <img className='' src="https://i.ibb.co/y4mKH54/pexels-nubia-navarro-nubikini-981588-min.jpg" />
                 </SwiperSlide>
-                <SwiperSlide>
+                <SwiperSlide className='swiper-slide-img'>
                     <img className='' src="https://i.ibb.co/KL92z8B/pexels-bhupendra-singh-3358482.jpg" />
                 </SwiperSlide>
-                <SwiperSlide>
+                <SwiperSlide className='swiper-slide-img'>
                     <img className='' src="https://i.ibb.co/4mf3gcd/pexels-nubia-navarro-nubikini-1522186.jpg" />
                 </SwiperSlide>
-                <SwiperSlide>
+                <SwiperSlide className='swiper-slide-img'>
                     <img className='' src="https://i.ibb.co/51wz2Fn/pexels-the-lazy-artist-gallery-2527939.jpg" />
                 </SwiperSlide>
-                <SwiperSlide>
-                    <img className='' src="https://swiperjs.com/demos/images/nature-6.jpg" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img className='' src="https://swiperjs.com/demos/images/nature-7.jpg" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img className='' src="https://swiperjs.com/demos/images/nature-8.jpg" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img className='' src="https://swiperjs.com/demos/images/nature-9.jpg" />
+                <SwiperSlide className='swiper-slide-img'>
+                    <img className='' src="https://i.ibb.co/cLvJXby/pexels-polesie-toys-4491565-min.jpg" />
                 </SwiperSlide>
             </Swiper>
         </div>

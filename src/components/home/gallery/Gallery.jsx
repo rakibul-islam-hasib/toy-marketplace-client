@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FaStar } from 'react-icons/fa';
+import PhotoGallery from './PhotoGallery';
 
 const Gallery = () => {
     const [data, setData] = useState([]);
@@ -18,7 +19,7 @@ const Gallery = () => {
             <div className="w-[60%] mx-auto text-center my-4">
                 <p className='text-sm'>From sleek sports cars that hug the curves of imaginary tracks to powerful monster trucks that conquer any terrain, our gallery showcases an extensive selection of toy cars that will ignite the thrill of racing in young hearts. Choose from an array of iconic models, including classic muscle cars, rugged off-road vehicles, and futuristic super cars.</p>
             </div>
-            <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 w-[90%] mx-auto">
+            {/* <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 w-[90%] mx-auto">
                 {
                     data.map(item => <div
                      className='w-[90%] 
@@ -32,7 +33,8 @@ const Gallery = () => {
                         </div>
                     </div>)
                 }
-            </div>
+            </div> */}
+            <PhotoGallery />
 
 
         </div>

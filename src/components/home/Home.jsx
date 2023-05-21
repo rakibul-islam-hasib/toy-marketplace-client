@@ -5,7 +5,6 @@ import Service from './services/Offer';
 import TodayDeal from './deal/TodayDeal';
 import Gallery from './gallery/Gallery';
 import Company from './Company';
-import PhotoGallery from './gallery/PhotoGallery';
 const Home = () => {
     document.title = 'Zooming Wheels | Home';
     return (
@@ -16,7 +15,6 @@ const Home = () => {
             <ShopByCategory />
             <Gallery />
             <Company /> 
-            <PhotoGallery />
         </div>
     );
 };
