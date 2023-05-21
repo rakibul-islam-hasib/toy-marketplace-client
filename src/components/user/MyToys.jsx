@@ -12,7 +12,7 @@ const MyToys = () => {
     const [sort, setSort] = useState('LtoH');
     const [currentPage, setCurrentPage] = useState(1);
     const navigate = useNavigate();
-    let itemsPerPage = 10;
+    let itemsPerPage = 20;
     const totalPages = Math.ceil(getTotal / itemsPerPage);
     const { user } = useContext(AuthContext);
     const handleChange = (event) => {
@@ -36,7 +36,7 @@ const MyToys = () => {
     // Short by price 
     useEffect(() => {
         if (sort === 'LtoH') {
-            fetch(`https://zooming-wheels.vercel.app/api/user-toys?email=${user.email}&page=${currentPage}&limit=${itemsPerPage}&sort=-1`)
+            fetch(`https://zooming-wheels.vercel.app/api/user-toys?email=${user.email}&page=${currentPage}&limit=${itemsPerPage}&sort=1`)
 
                 .then(res => res.json())
                 .then(data => {
@@ -44,14 +44,13 @@ const MyToys = () => {
                 })
         }
         if (sort === 'hToL') {
-            fetch(`https://zooming-wheels.vercel.app/api/user-toys?email=${user.email}&page=${currentPage}&limit=${itemsPerPage}&sort=1`)
+            fetch(`https://zooming-wheels.vercel.app/api/user-toys?email=${user.email}&page=${currentPage}&limit=${itemsPerPage}&sort=-1`)
                 .then(res => res.json())
                 .then(data => {
                     setData(data)
                 })
         }
     }, [sort, currentPage])
-
     const handlePageChange = (event, value) => {
         setCurrentPage(value);
     };

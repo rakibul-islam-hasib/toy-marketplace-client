@@ -5,7 +5,7 @@ import SearchHero from './SearchHero';
 
 const Toys = () => {
     const getTotal = useLoaderData();
-    const itemsPerPage = 10;
+    const itemsPerPage = 20;
     const navigate = useNavigate();
     const [currentPage, setCurrentPage] = useState(1);
     const [data, setData] = useState([]); // !All data
