@@ -19,7 +19,7 @@ const ShopByCategory = () => {
   const [filteredToys, setFilteredToys] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/all-toys')
+    fetch('https://zooming-wheels.vercel.app/api/all-toys')
       .then(res => res.json())
       .then(data => {
         setAllToys(data);

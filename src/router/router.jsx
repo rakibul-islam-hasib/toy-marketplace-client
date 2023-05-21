@@ -37,12 +37,12 @@ const router = createBrowserRouter([
             {
                 path: '/toys',
                 element: <Toys />,
-                loader: () => fetch('http://localhost:5000/api/total-toys')
+                loader: () => fetch('https://zooming-wheels.vercel.app/api/total-toys')
             },
             {
                 path: '/toy/:id',
                 element: <Privet><Details /></Privet>,
-                loader: ({ params }) => fetch(`http://localhost:5000/api/toy/${params.id}`)
+                loader: ({ params }) => fetch(`https://zooming-wheels.vercel.app/api/toy/${params.id}`)
             },
             {
                 path: 'my-toys',
@@ -51,7 +51,7 @@ const router = createBrowserRouter([
             {
                 path: '/update/:id',
                 element: <Privet><Update /></Privet>,
-                loader: ({ params }) => fetch(`http://localhost:5000/api/toy/${params.id}`)
+                loader: ({ params }) => fetch(`https://zooming-wheels.vercel.app/api/toy/${params.id}`)
             },
             {
                 path : '/blog', 

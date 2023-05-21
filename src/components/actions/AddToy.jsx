@@ -36,7 +36,7 @@ const AddToy = () => {
         const formData = new FormData(e.target);
         const data = Object.fromEntries(formData);
         
-        fetch(`http://localhost:5000/api/add-toy`, {
+        fetch(`https://zooming-wheels.vercel.app/api/add-toy`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

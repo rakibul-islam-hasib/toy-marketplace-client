@@ -19,7 +19,7 @@ const MyToys = () => {
         setSort(event.target.value);
     };
     useEffect(() => {
-        fetch(`http://localhost:5000/api/user-toys?email=${user.email}`)
+        fetch(`https://zooming-wheels.vercel.app/api/user-toys?email=${user.email}`)
             .then(res => res.json())
             .then(data => {
                 // setData(data)
@@ -29,14 +29,14 @@ const MyToys = () => {
     }, [data])
     useEffect(() => {
         document.title = `My Toys | Zooming Wheels`;
-        fetch(`http://localhost:5000/api/user-toys?email=${user.email}&page=${currentPage}&limit=${itemsPerPage}`)
+        fetch(`https://zooming-wheels.vercel.app/api/user-toys?email=${user.email}&page=${currentPage}&limit=${itemsPerPage}`)
             .then(res => res.json())
             .then(data => setData(data))
     }, [currentPage]);
     // Short by price 
     useEffect(() => {
         if (sort === 'LtoH') {
-            fetch(`http://localhost:5000/api/user-toys?email=${user.email}&page=${currentPage}&limit=${itemsPerPage}&sort=-1`)
+            fetch(`https://zooming-wheels.vercel.app/api/user-toys?email=${user.email}&page=${currentPage}&limit=${itemsPerPage}&sort=-1`)
 
                 .then(res => res.json())
                 .then(data => {
@@ -44,7 +44,7 @@ const MyToys = () => {
                 })
         }
         if (sort === 'hToL') {
-            fetch(`http://localhost:5000/api/user-toys?email=${user.email}&page=${currentPage}&limit=${itemsPerPage}&sort=1`)
+            fetch(`https://zooming-wheels.vercel.app/api/user-toys?email=${user.email}&page=${currentPage}&limit=${itemsPerPage}&sort=1`)
                 .then(res => res.json())
                 .then(data => {
                     setData(data)
@@ -66,7 +66,7 @@ const MyToys = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/api/delete-toy/${id}`, {
+                fetch(`https://zooming-wheels.vercel.app/api/delete-toy/${id}`, {
                     method: 'DELETE',
                 })
                     .then(res => res.json())

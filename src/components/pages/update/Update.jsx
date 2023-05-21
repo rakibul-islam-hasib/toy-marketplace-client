@@ -61,7 +61,7 @@ const Update = () => {
         updatedData.email = data.email;
         updatedData._id = data._id;
         // console.log(data) 
-        fetch(`http://localhost:5000/api/update-toy/${data._id}`, {
+        fetch(`https://zooming-wheels.vercel.app/api/update-toy/${data._id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

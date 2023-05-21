@@ -6,7 +6,7 @@ const TodayDeal = () => {
     const [data, setData] = useState([]); 
 
     useEffect(()=>{
-        fetch('http://localhost:5000/api/today-deal')
+        fetch('https://zooming-wheels.vercel.app/api/today-deal')
         .then(res => res.json())
         .then(data => setData(data))
     },[])

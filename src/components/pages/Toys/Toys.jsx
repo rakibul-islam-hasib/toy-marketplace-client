@@ -15,13 +15,13 @@ const Toys = () => {
 
     // !Fetch all data
     useEffect(() => {
-        fetch(`http://localhost:5000/api/toys?limit=${itemsPerPage}&page=${currentPage}`)
+        fetch(`https://zooming-wheels.vercel.app/api/toys?limit=${itemsPerPage}&page=${currentPage}`)
             .then(res => res.json())
             .then(data => setData(data))
     }, [currentPage, reset])
     // !Fetch search data 
     useEffect(() => {
-        fetch(`http://localhost:5000/api/search?search=${searchQuery}&limit=${itemsPerPage}&page=${currentPage}`)
+        fetch(`https://zooming-wheels.vercel.app/api/search?search=${searchQuery}&limit=${itemsPerPage}&page=${currentPage}`)
             .then(res => res.json())
             .then(data => {
                 setData(data)
